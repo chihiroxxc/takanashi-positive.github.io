@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Play/" style="font-size: 10px;">Play</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a>
+						<a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Play/" style="font-size: 10px;">Play</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,148 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-reading-http-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/23/reading-http-notes/" class="article-date">
+  	<time datetime="2016-03-23T07:13:14.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/23/reading-http-notes/">《图解Http读书笔记》</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。</p>
+</blockquote>
+<h1 id="1-网络基础">1.网络基础</h1><h5 id="HTTP1-0_vs_HTTP1-1">HTTP1.0 vs HTTP1.1</h5><p>  目前主流的是HTTP1.1</p>
+<h5 id="TCP/IP">TCP/IP</h5><p>  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。</p>
+<ul>
+<li>应用层  FTP  DNS HTTP</li>
+<li>传输层 TCP UDP</li>
+<li>网络层 </li>
+<li>数据链路层</li>
+</ul>
+<h5 id="URI_URL">URI URL</h5><p>Uniform Resource Identifier</p>
+<p>Uniform Resource Locator</p>
+<h1 id="2-简单的HTTP">2.简单的HTTP</h1><h5 id="HTTP/1-1中可以使用的方法">HTTP/1.1中可以使用的方法</h5><ul>
+<li>GET 获取资源</li>
+<li>POST 传输实体主体</li>
+<li>PUT 传输文件</li>
+<li>HEAD 获得报文首部</li>
+<li>DELETE 删除文件</li>
+<li>OPTIONS (only in 1.1) 询问支持的方法</li>
+<li>TRACE (only in 1.1) 追踪路径</li>
+<li>CONNECT (only in 1.1) 要求用隧道协议连接代理</li>
+</ul>
+<h5 id="HTTP_的持久连接">HTTP 的持久连接</h5><p>只要任意一端没有明确提出断开连接，则保持TCP连接状态。<br>建立TCP连接：<strong>三次握手</strong> 断开TCP连接：<strong>四次挥手</strong>。</p>
+<p><strong>管线化</strong>（pipelining）：管线化技术能够做到并行发送多个请求，不需要一个一个等待相应。</p>
+<h5 id="Cookie">Cookie</h5><p>HTTP是无状态协议，为了记录状态引入了Cookie信息来管理客户端的状态。</p>
+<h4 id="HTTP_返回状态码">HTTP 返回状态码</h4><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 200 ok</td>
+<td>成功</td>
+</tr>
+<tr>
+<td> 204 no content</td>
+<td>请求处理成功，没有新资源需要返回</td>
+</tr>
+<tr>
+<td> 204 partcial content</td>
+<td>成功执行了对某部分资源的请求</td>
+</tr>
+<tr>
+<td> 301 move permanently</td>
+<td>永久重定向</td>
+</tr>
+<tr>
+<td> 302 found</td>
+<td>临时重定向</td>
+</tr>
+<tr>
+<td> 304 not modified</td>
+<td>资源不符合请求条件</td>
+</tr>
+<tr>
+<td> 307 temporaryly redirect</td>
+<td>临时重定向</td>
+</tr>
+<tr>
+<td> 400 bad requst</td>
+<td>请求有错</td>
+</tr>
+<tr>
+<td> 401 unauthorized</td>
+<td>需要认证</td>
+</tr>
+<tr>
+<td> 403 forbidden</td>
+<td>拒绝访问</td>
+</tr>
+<tr>
+<td> 404 not found</td>
+<td>无法找到请求的资源</td>
+</tr>
+<tr>
+<td> 500 internal server error</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td> 503 service unavailable</td>
+<td>服务器无法响应</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-all-sorts-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
   
