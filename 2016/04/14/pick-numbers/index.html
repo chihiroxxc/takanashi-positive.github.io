@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>《图解Http》读书笔记 | Chihiro&#39;s blog</title>
+  <title>从海量数据里选取k个数的相关问题 | Chihiro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。
-
-1.网络基础HTTP1.0 vs HTTP1.1  目前主流的是HTTP1.1
-TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。">
+  <meta name="description" content="最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。
+从海量数据里选取 Top k个数
+最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是O(logn)
+改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若num_i大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《图解Http》读书笔记">
-<meta property="og:url" content="http://yoursite.com/2016/03/23/reading-http-notes/index.html">
+<meta property="og:title" content="从海量数据里选取k个数的相关问题">
+<meta property="og:url" content="http://yoursite.com/2016/04/14/pick-numbers/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
-<meta property="og:description" content="《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。
-
-1.网络基础HTTP1.0 vs HTTP1.1  目前主流的是HTTP1.1
-TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。">
-<meta property="og:updated_time" content="2016-03-28T13:31:13.000Z">
+<meta property="og:description" content="最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。
+从海量数据里选取 Top k个数
+最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是O(logn)
+改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若num_i大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂">
+<meta property="og:updated_time" content="2016-04-14T06:33:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《图解Http》读书笔记">
-<meta name="twitter:description" content="《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。
-
-1.网络基础HTTP1.0 vs HTTP1.1  目前主流的是HTTP1.1
-TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。">
+<meta name="twitter:title" content="从海量数据里选取k个数的相关问题">
+<meta name="twitter:description" content="最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。
+从海量数据里选取 Top k个数
+最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是O(logn)
+改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若num_i大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂">
   
     <link rel="alternative" href="/atom.xml" title="Chihiro&#39;s blog" type="application/atom+xml">
   
@@ -177,11 +177,11 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-reading-http-notes" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-pick-numbers" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/03/23/reading-http-notes/" class="article-date">
-  	<time datetime="2016-03-23T07:13:14.000Z" itemprop="datePublished">2016-03-23</time>
+      <a href="/2016/04/14/pick-numbers/" class="article-date">
+  	<time datetime="2016-04-14T05:49:45.000Z" itemprop="datePublished">2016-04-14</time>
 </a>
     </div>
   
@@ -194,7 +194,7 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
         
   
     <h1 class="article-title" itemprop="name">
-      《图解Http》读书笔记
+      从海量数据里选取k个数的相关问题
     </h1>
   
 
@@ -203,7 +203,7 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
 	</div>
 
         
@@ -214,94 +214,37 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。</p>
-</blockquote>
-<h1 id="1-网络基础">1.网络基础</h1><h5 id="HTTP1-0_vs_HTTP1-1">HTTP1.0 vs HTTP1.1</h5><p>  目前主流的是HTTP1.1</p>
-<h5 id="TCP/IP">TCP/IP</h5><p>  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。</p>
-<ul>
-<li>应用层  FTP  DNS HTTP</li>
-<li>传输层 TCP UDP</li>
-<li>网络层 </li>
-<li>数据链路层</li>
+        <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
+<h3 id="从海量数据里选取_Top_k个数">从海量数据里选取 Top k个数</h3><ul>
+<li>最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是<code>O(logn)</code></li>
+<li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
+<li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
 </ul>
-<h5 id="URI_URL">URI URL</h5><p>Uniform Resource Identifier</p>
-<p>Uniform Resource Locator</p>
-<h1 id="2-简单的HTTP">2.简单的HTTP</h1><h5 id="HTTP/1-1中可以使用的方法">HTTP/1.1中可以使用的方法</h5><ul>
-<li>GET 获取资源</li>
-<li>POST 传输实体主体</li>
-<li>PUT 传输文件</li>
-<li>HEAD 获得报文首部</li>
-<li>DELETE 删除文件</li>
-<li>OPTIONS (only in 1.1) 询问支持的方法</li>
-<li>TRACE (only in 1.1) 追踪路径</li>
-<li>CONNECT (only in 1.1) 要求用隧道协议连接代理</li>
-</ul>
-<h5 id="HTTP_的持久连接">HTTP 的持久连接</h5><p>只要任意一端没有明确提出断开连接，则保持TCP连接状态。<br>建立TCP连接：<strong>三次握手</strong> 断开TCP连接：<strong>四次挥手</strong>。</p>
-<p><strong>管线化</strong>（pipelining）：管线化技术能够做到并行发送多个请求，不需要一个一个等待相应。</p>
-<h5 id="Cookie">Cookie</h5><p>HTTP是无状态协议，为了记录状态引入了Cookie信息来管理客户端的状态。</p>
-<h4 id="HTTP_返回状态码">HTTP 返回状态码</h4><table>
-<thead>
-<tr>
-<th>状态码</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 200 ok</td>
-<td>成功</td>
-</tr>
-<tr>
-<td> 204 no content</td>
-<td>请求处理成功，没有新资源需要返回</td>
-</tr>
-<tr>
-<td> 204 partcial content</td>
-<td>成功执行了对某部分资源的请求</td>
-</tr>
-<tr>
-<td> 301 move permanently</td>
-<td>永久重定向</td>
-</tr>
-<tr>
-<td> 302 found</td>
-<td>临时重定向</td>
-</tr>
-<tr>
-<td> 304 not modified</td>
-<td>资源不符合请求条件</td>
-</tr>
-<tr>
-<td> 307 temporaryly redirect</td>
-<td>临时重定向</td>
-</tr>
-<tr>
-<td> 400 bad requst</td>
-<td>请求有错</td>
-</tr>
-<tr>
-<td> 401 unauthorized</td>
-<td>需要认证</td>
-</tr>
-<tr>
-<td> 403 forbidden</td>
-<td>拒绝访问</td>
-</tr>
-<tr>
-<td> 404 not found</td>
-<td>无法找到请求的资源</td>
-</tr>
-<tr>
-<td> 500 internal server error</td>
-<td>服务器内部错误</td>
-</tr>
-<tr>
-<td> 503 service unavailable</td>
-<td>服务器无法响应</td>
-</tr>
-</tbody>
-</table>
+<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em></p>
+<h3 id="从海量数据里随机选取_k_个数">从海量数据里随机选取 k 个数</h3><p><strong>随机选择算法</strong><br>随机选择算法应该是比较容易想到的一种思路，但其依赖于必须知道总共有多少个数据，以及可以在<code>O(1)</code>时间内获取到第i个数据。这样效率才会比较高。</p>
+<p>下面列出的是，从100个数里随机选择10个数的示例代码。</p>
+<pre><code>void printRandom10(<span class="built_in">int</span> A[]){
+    <span class="built_in">Random</span> r = new <span class="built_in">Random</span>()<span class="comment">;</span>
+    <span class="built_in">int</span> len = A.length<span class="comment">;</span>
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span><span class="comment">;i &lt; 10;i++){</span>
+        <span class="built_in">int</span> <span class="built_in">random</span> = r.nextInt(len)<span class="comment">;</span>
+        System.out.println(A[<span class="built_in">random</span>])<span class="comment">;</span>
+        swap(A[<span class="built_in">random</span>],A[len])<span class="comment">;</span>
+        len--<span class="comment">;</span>
+    }
+}
+</code></pre><p><em>如果此时题目再变化一下呢？当存储数据的<strong>不是数组，而是链表</strong>，怎么才能利用最低的时间复杂度和空间复杂度选取 K 个数呢</em></p>
+<h3 id="从未知长度的链表里随机选取_k_个数">从未知长度的链表里随机选取 k 个数</h3><p>在无法确定链表长度的情况下，遍历链表的过程中，对第 i 个元素都有两种选择：<strong>选出，不选出</strong>。确保每个元素选出的概率都是 <code>k/n</code> 才是随机的，但是我们并不知道n的大小。</p>
+<p>假如我们按照选取 Top k 的思路，先选择链表的前 k 个元素，将后面的元素按照一定的概率选出替换，最后剩下的 k 个即为随机选择的 k 个。</p>
+<p><strong>以 k/i 的概率选出第 i 个元素替换被选出的 k 个元素（i&gt;k）</strong></p>
+<p>下面证明下这个结论。</p>
+<p>现在我们取出第 i 个元素，随机替换已选出元素中的一个。这个概率是 k/i，那么当对第 i+1 个元素进行操作时，保持第 i 个元素依然在选出的 k 个元素集合中的概率是：</p>
+<p>\[  \frac{k}{i} \Bigl( 1-\frac{k}{i+1}+\frac{k}{i+1} \times \frac{k-1}{k}\Bigr) = \frac{k}{i+1}\]</p>
+<p>递推至 n 即可证明</p>
+<p><strong>上面这个方法的证明方法似乎有点复杂，其实换一种思路，就可以更简单的解决这道题。
+</strong></p>
+<p>首先仍要维护一个大小为 k 的堆，其存放 k 个 random 值最大的节点，这个 random 值是什么呢，就是我们在遍历链表时，对每个节点随机生成一个值，最后选取的即是10个 random 值最大的节点。为什么这种方法可行呢？试想从一副扑克中随机选择5张牌，我们可以在牌堆内随机抽5张，同时我们也可以将这副牌洗一洗，从牌顶拿走5张即可。</p>
+<p>这种简单的思路跟后者有点像吧~</p>
 
       
     </div>
@@ -311,18 +254,9 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
     
 <nav id="article-nav">
   
-    <a href="/2016/04/14/pick-numbers/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          从海量数据里选取k个数的相关问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/03/17/all-sorts-algorithm/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【总结篇】所有常见的排序算法</div>
+    <a href="/2016/03/23/reading-http-notes/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《图解Http》读书笔记</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -351,7 +285,7 @@ TCP/IP  通常使用的网络，包括互联网都是在TCP/IP协议族基础上
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="reading-http-notes" data-title="《图解Http》读书笔记" data-url="http://yoursite.com/2016/03/23/reading-http-notes/"></div>
+	<div class="ds-thread" data-thread-key="pick-numbers" data-title="从海量数据里选取k个数的相关问题" data-url="http://yoursite.com/2016/04/14/pick-numbers/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

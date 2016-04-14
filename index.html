@@ -105,7 +105,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Play/" style="font-size: 10px;">Play</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
+						<a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Play/" style="font-size: 10px;">Play</a> <a href="/tags/Scala/" style="font-size: 10px;">Scala</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a>
 					</div>
 				</section>
 				
@@ -168,6 +168,91 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-pick-numbers" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/14/pick-numbers/" class="article-date">
+  	<time datetime="2016-04-14T05:49:45.000Z" itemprop="datePublished">2016-04-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/14/pick-numbers/">从海量数据里选取k个数的相关问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
+<h3 id="从海量数据里选取_Top_k个数">从海量数据里选取 Top k个数</h3><ul>
+<li>最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是<code>O(logn)</code></li>
+<li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
+<li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
+</ul>
+<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em></p>
+<h3 id="从海量数据里随机选取_k_个数">从海量数据里随机选取 k 个数</h3><p><strong>随机选择算法</strong><br>随机选择算法应该是比较容易想到的一种思路，但其依赖于必须知道总共有多少个数据，以及可以在<code>O(1)</code>时间内获取到第i个数据。这样效率才会比较高。</p>
+<p>下面列出的是，从100个数里随机选择10个数的示例代码。</p>
+<pre><code>void printRandom10(<span class="built_in">int</span> A[]){
+    <span class="built_in">Random</span> r = new <span class="built_in">Random</span>()<span class="comment">;</span>
+    <span class="built_in">int</span> len = A.length<span class="comment">;</span>
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span><span class="comment">;i &lt; 10;i++){</span>
+        <span class="built_in">int</span> <span class="built_in">random</span> = r.nextInt(len)<span class="comment">;</span>
+        System.out.println(A[<span class="built_in">random</span>])<span class="comment">;</span>
+        swap(A[<span class="built_in">random</span>],A[len])<span class="comment">;</span>
+        len--<span class="comment">;</span>
+    }
+}
+</code></pre><p><em>如果此时题目再变化一下呢？当存储数据的<strong>不是数组，而是链表</strong>，怎么才能利用最低的时间复杂度和空间复杂度选取 K 个数呢</em></p>
+<h3 id="从未知长度的链表里随机选取_k_个数">从未知长度的链表里随机选取 k 个数</h3><p>在无法确定链表长度的情况下，遍历链表的过程中，对第 i 个元素都有两种选择：<strong>选出，不选出</strong>。确保每个元素选出的概率都是 <code>k/n</code> 才是随机的，但是我们并不知道n的大小。</p>
+<p>假如我们按照选取 Top k 的思路，先选择链表的前 k 个元素，将后面的元素按照一定的概率选出替换，最后剩下的 k 个即为随机选择的 k 个。</p>
+<p><strong>以 k/i 的概率选出第 i 个元素替换被选出的 k 个元素（i&gt;k）</strong></p>
+<p>下面证明下这个结论。</p>
+<p>现在我们取出第 i 个元素，随机替换已选出元素中的一个。这个概率是 k/i，那么当对第 i+1 个元素进行操作时，保持第 i 个元素依然在选出的 k 个元素集合中的概率是：</p>
+<p>\[  \frac{k}{i} \Bigl( 1-\frac{k}{i+1}+\frac{k}{i+1} \times \frac{k-1}{k}\Bigr) = \frac{k}{i+1}\]</p>
+<p>递推至 n 即可证明</p>
+<p><strong>上面这个方法的证明方法似乎有点复杂，其实换一种思路，就可以更简单的解决这道题。
+</strong></p>
+<p>首先仍要维护一个大小为 k 的堆，其存放 k 个 random 值最大的节点，这个 random 值是什么呢，就是我们在遍历链表时，对每个节点随机生成一个值，最后选取的即是10个 random 值最大的节点。为什么这种方法可行呢？试想从一副扑克中随机选择5张牌，我们可以在牌堆内随机抽5张，同时我们也可以将这副牌洗一洗，从牌顶拿走5张即可。</p>
+<p>这种简单的思路跟后者有点像吧~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-reading-http-notes" class="article article-type-post" itemscope itemprop="blogPost">
   
