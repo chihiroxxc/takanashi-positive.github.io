@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Tag: Play | Chihiro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
@@ -18,10 +19,11 @@
     <link rel="alternative" href="/atom.xml" title="Chihiro&#39;s blog" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="//favicon.png">
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
+
 <body>
   <div id="container">
     <div class="left-col">
@@ -30,7 +32,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg" class="js-avatar">
+			<img lazy-src="0" class="js-avatar">
 			
 		</a>
 
@@ -58,6 +60,11 @@
 						</div>
 						
 						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
 					</div>
 					
 				</div>
@@ -65,10 +72,12 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>菜单</li>
-						<li>标签</li>
+						<li>標籤</li>
 						
 						<li>友情链接</li>
 						
+						
+						<li>關於</li>
 						
 					</ul>
 				</div>
@@ -114,17 +123,34 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://evilyin.github.io">寒羽光的博客</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
 			        
 			        </div>
 				</section>
 				
 
 				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
 			</div>
 		</div>
 	</header>				
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
@@ -135,7 +161,9 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg" class="js-avatar">
+				
+					<img lazy-src="0" class="js-avatar">
+				
 			</div>
 			<hgroup>
 			  <h1 class="header-author">Xu Chang</h1>
@@ -167,6 +195,7 @@
 		</header>				
 	</div>
 </nav>
+
       <div class="body-wrap">
   
   
@@ -243,7 +272,8 @@
 		isArchive: false,
 		isTag: true,
 		isCategory: false,
-		open_in_new: false
+		open_in_new: false,
+		root: /
 	}
 </script>
 <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
