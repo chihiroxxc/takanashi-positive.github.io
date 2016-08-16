@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="Binary Indexed Tree," />
 
 
 
@@ -84,17 +84,19 @@
 
 
 
-<meta name="description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
+<meta name="description" content="用途树状数组（Binary Indexed Tree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。
+顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pod无法彻底删除依赖包的问题">
-<meta property="og:url" content="http://yoursite.com/2015/11/12/ios-pod-delete-problem/index.html">
+<meta property="og:title" content="树状数组(Binary Indexed Tree)">
+<meta property="og:url" content="http://yoursite.com/2016/08/16/binary-indexed-tree/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
-<meta property="og:description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/432A969D-08AD-4111-A7BB-6A948C67FE81.jpeg">
-<meta property="og:updated_time" content="2015-11-12T13:55:42.000Z">
+<meta property="og:description" content="用途树状数组（Binary Indexed Tree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。
+顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。">
+<meta property="og:updated_time" content="2016-08-16T14:44:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pod无法彻底删除依赖包的问题">
-<meta name="twitter:description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
+<meta name="twitter:title" content="树状数组(Binary Indexed Tree)">
+<meta name="twitter:description" content="用途树状数组（Binary Indexed Tree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。
+顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。">
 
 
 
@@ -115,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/11/12/ios-pod-delete-problem/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/16/binary-indexed-tree/"/>
 
-  <title> Pod无法彻底删除依赖包的问题 | Chihiro's blog </title>
+  <title> 树状数组(Binary Indexed Tree) | Chihiro's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -237,7 +239,7 @@
             
             
               
-                Pod无法彻底删除依赖包的问题
+                树状数组(Binary Indexed Tree)
               
             
           </h1>
@@ -249,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-12T21:15:11+08:00" content="2015-11-12">
-              2015-11-12
+            <time itemprop="dateCreated" datetime="2016-08-16T20:58:28+08:00" content="2016-08-16">
+              2016-08-16
             </time>
           </span>
 
@@ -277,9 +279,52 @@
       
 
       
-        <p>在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。<br>在一番寻找之后，在<strong>Target-&gt;Build Settings-&gt;Other Link Flags</strong>中找到了依然存在的第三方包引用</p>
-<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/432A969D-08AD-4111-A7BB-6A948C67FE81.jpeg" alt="如图所示"></p>
-<p>删除这里的引用之后pod update一下就ok了。不知道这是不是pod的bug，还是我使用有误</p>
+        <h4 id="用途">用途</h4><p>树状数组（<strong>B</strong>inary <strong>I</strong>ndexed <strong>T</strong>ree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。</p>
+<p>顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。</p>
+<a id="more"></a>
+<p>思考下面这个问题:</p>
+<p>Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.</p>
+<p>The update(i, val) function modifies nums by updating the element at index i to val.</p>
+<p>问题来自 <a href="https://leetcode.com/problems/range-sum-query-mutable/" target="_blank" rel="external">LeetCode 307 Range Sum Query</a></p>
+<p>树状数组可以将<strong>Update</strong>和<strong>Query</strong>的时间复杂度降低到<code>O(NlogN)</code></p>
+<h4 id="基本思想">基本思想</h4><p>考虑这个数组 <code>[1,2,5,3,4,6,7,9]</code></p>
+<p>将其转化为树形即</p>
+<pre><code>--------------*
+------*
+--*     --*
+*   *   *   *
+<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span>
+</code></pre><p>为了降低Query的时间，使用<code>tree[]</code>来存放每个节点所 cover 的和。 如对 <code>tree[5]</code> 来说，<code>tree[5] = nums[5] + tree[2]</code>。</p>
+<p>每个节点所cover的和怎么来判断呢？有如下的计算方式：</p>
+<p>对于<code>tree[index]</code>来说，<code>tree[index] = nums[index - 2^r + 1] + ... + nums[index]</code>, <code>r</code>代表 index 的二进制形式中最右边的1后面0的个数。</p>
+<pre><code>-------------------------------*(<span class="number">37</span>)
+-------------*(<span class="number">11</span>)
+-----*(<span class="number">3</span>)         -----*(<span class="number">10</span>)
+*(<span class="number">1</span>)     *(<span class="number">5</span>)     *(<span class="number">4</span>)     *(<span class="number">7</span>)
+<span class="number">1</span>    <span class="number">2</span>   <span class="number">3</span>    <span class="number">4</span>   <span class="number">5</span>    <span class="number">6</span>   <span class="number">7</span>    <span class="number">8</span>
+---------------------------------
+<span class="number">1</span>    <span class="number">2</span>   <span class="number">5</span>    <span class="number">3</span>   <span class="number">4</span>    <span class="number">6</span>   <span class="number">7</span>    <span class="number">9</span>
+</code></pre><p>如果要计算从<code>0...6</code>的和，由上图可以直观的看到<code>sum[6] = tree[6]  + tree[4]</code>。</p>
+<p>对于<code>sum[index]</code>来说, 从index开始，将index最右边的1依次变为零，直到仅剩最左边的唯一一个1，将过程中产生的<code>tree[index_n]</code>加起来就可以得到<code>sum[index]</code>，<code>sum[110] = sum[110] + sum[100]</code>。</p>
+<h4 id="最后一个1_－_lowBit">最后一个1 － lowBit</h4><p>假设有一个二进制数 <code>10010110</code> 相分离出最后一个1得到<code>00000010</code>应该怎么做呢？</p>
+<pre><code><span class="built_in">num</span> &amp; -<span class="built_in">num</span> <span class="comment">//取最后一个1</span>
+</code></pre><p>负数为补码，即取反+1，设某二进制数为<code>XXXX1000</code>, 取反操作得到<code>xxxx0111</code>（<code>x</code>表示<code>X</code>的反）, 加1操作得到<code>xxxx1000</code>, 再将其于之前的 <code>XXXX1000</code> 进行与操作之后，即可得到<code>00001000</code>。</p>
+<h4 id="Query_Sum">Query Sum</h4><pre><code><span class="keyword">int</span> QuerySum(<span class="keyword">int</span> <span class="keyword">index</span>){
+    <span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span>;
+    <span class="keyword">while</span>(<span class="keyword">index</span>&gt;<span class="number">0</span>){
+        <span class="keyword">sum</span>+= tree[<span class="keyword">index</span>];
+        <span class="keyword">index</span> -= (<span class="keyword">index</span> &amp; -<span class="keyword">index</span>)        
+    }
+}
+</code></pre><p>有了<code>QuerySum</code>这个函数，我们就可以计算<code>[0...index]</code>的和，如果要计算<code>[i...j]</code>的和，就用<code>QuerySum(j)-QuerySum(i)</code>即可。</p>
+<h4 id="Update">Update</h4><p><code>QuerySum</code> 是自顶向下搜寻相加得到和，而<code>Update</code>函数需要从<code>index</code>开始自底向上，对每一个需要对<code>index</code>负责的点进行更新。</p>
+<pre><code>public void update<span class="comment">(int i, int val)</span>{
+    <span class="keyword">while</span> <span class="comment">(i&lt;=n)</span>{
+        BIT[i] += val;
+        i += <span class="comment">(i &amp; -i)</span>;
+    }
+}
+</code></pre><h4 id="总结">总结</h4><p><code>BIT</code> 是个小巧精妙的数据结构，需要理解 <code>lowBit</code> 是关键的地方。</p>
 
       
     </div>
@@ -302,7 +347,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/Binary-Indexed-Tree/" rel="tag">#Binary Indexed Tree</a>
           
         </div>
       
@@ -311,17 +356,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/10/about-hexo/" rel="next" title="Hexo搭建博客时npm的permission问题">
-                <i class="fa fa-chevron-left"></i> Hexo搭建博客时npm的permission问题
+              <a href="/2016/04/14/pick-numbers/" rel="next" title="从海量数据里选取k个数的相关问题">
+                <i class="fa fa-chevron-left"></i> 从海量数据里选取k个数的相关问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/12/xib-modify/" rel="prev" title="修改xib无效，运行后修改没有显示的问题">
-                修改xib无效，运行后修改没有显示的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -428,7 +469,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#用途"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本思想"><span class="nav-number">2.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后一个1_－_lowBit"><span class="nav-number">3.</span> <span class="nav-text">最后一个1 － lowBit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Query_Sum"><span class="nav-number">4.</span> <span class="nav-text">Query Sum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Update"><span class="nav-number">5.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

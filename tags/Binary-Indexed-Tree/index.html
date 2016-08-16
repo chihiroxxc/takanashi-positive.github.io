@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,17 +84,15 @@
 
 
 
-<meta name="description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Pod无法彻底删除依赖包的问题">
-<meta property="og:url" content="http://yoursite.com/2015/11/12/ios-pod-delete-problem/index.html">
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chihiro's blog">
+<meta property="og:url" content="http://yoursite.com/tags/Binary-Indexed-Tree/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
-<meta property="og:description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/432A969D-08AD-4111-A7BB-6A948C67FE81.jpeg">
-<meta property="og:updated_time" content="2015-11-12T13:55:42.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pod无法彻底删除依赖包的问题">
-<meta name="twitter:description" content="在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。在一番寻找之后，在Target-&amp;gt;Build Settings-&amp;gt;Other Link Flags中找到了依然存在的">
+<meta name="twitter:title" content="Chihiro's blog">
+<meta name="twitter:description">
 
 
 
@@ -115,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/11/12/ios-pod-delete-problem/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/Binary-Indexed-Tree/"/>
 
-  <title> Pod无法彻底删除依赖包的问题 | Chihiro's blog </title>
+  <title> 标签: Binary Indexed Tree | Chihiro's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +136,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,128 +214,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        Binary Indexed Tree
+        <small>标签</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
+      
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/08/16/binary-indexed-tree/" itemprop="url">
               
-                Pod无法彻底删除依赖包的问题
+                <span itemprop="name">树状数组(Binary Indexed Tree)</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-12T21:15:11+08:00" content="2015-11-12">
-              2015-11-12
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-08-16T20:58:28+08:00"
+              content="2016-08-16" >
+          08-16
+        </time>
+      </div>
 
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。<br>在一番寻找之后，在<strong>Target-&gt;Build Settings-&gt;Other Link Flags</strong>中找到了依然存在的第三方包引用</p>
-<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/432A969D-08AD-4111-A7BB-6A948C67FE81.jpeg" alt="如图所示"></p>
-<p>删除这里的引用之后pod update一下就ok了。不知道这是不是pod的bug，还是我使用有误</p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/11/10/about-hexo/" rel="next" title="Hexo搭建博客时npm的permission问题">
-                <i class="fa fa-chevron-left"></i> Hexo搭建博客时npm的permission问题
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/12/xib-modify/" rel="prev" title="修改xib无效，运行后修改没有显示的问题">
-                修改xib无效，运行后修改没有显示的问题 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -345,10 +261,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -368,17 +280,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
@@ -421,17 +324,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -535,10 +427,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 
