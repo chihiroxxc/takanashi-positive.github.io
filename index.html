@@ -180,6 +180,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -238,6 +248,134 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/17/sort-colors/" itemprop="url">
+                  LeetCode No.75 Sort Colors
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-17T21:00:13+08:00" content="2016-08-17">
+              2016-08-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/17/sort-colors/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/sort-colors/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
+<p>Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.</p>
+<p><strong>Could you come up with an one-pass algorithm using only constant space?</strong></p>
+</blockquote>
+<p>一列数字，只包括0，1，2三种，要求在不用比较排序算法的情况下排列成<code>0..01..12..2</code>这种形式，而且只能遍历一边数组（所以不能用统计排序的方法）。</p>
+<p>这时可以想到一种非常简单的策略，遇到0的话把0放在数组的前面，遇到2的话把2放在数组后面，中间的1不做处理。用 <code>end0</code>来标识0序列结尾后的第一个位置，<code>start2</code>来标识2序列开始之前的一个位置。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/17/sort-colors/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/16/binary-indexed-tree/" itemprop="url">
                   树状数组(Binary Indexed Tree)
                 </a>
@@ -260,6 +398,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/16/binary-indexed-tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/binary-indexed-tree/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -358,6 +503,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/14/pick-numbers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/pick-numbers/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -378,40 +530,18 @@
 
       
         
-          
-            <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
+          <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
 <h3 id="从海量数据里选取_Top_k个数">从海量数据里选取 Top k个数</h3><ul>
 <li>最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是<code>O(logn)</code></li>
 <li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
 <li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
 </ul>
-<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em></p>
-<h3 id="从海量数据里随机选取_k_个数">从海量数据里随机选取 k 个数</h3><p><strong>随机选择算法</strong><br>随机选择算法应该是比较容易想到的一种思路，但其依赖于必须知道总共有多少个数据，以及可以在<code>O(1)</code>时间内获取到第i个数据。这样效率才会比较高。</p>
-<p>下面列出的是，从100个数里随机选择10个数的示例代码。</p>
-<pre><code>void printRandom10(<span class="built_in">int</span> A[]) {
-    <span class="built_in">Random</span> r = new <span class="built_in">Random</span>()<span class="comment">;</span>
-    <span class="built_in">int</span> len = A.length<span class="comment">;</span>
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) {</span>
-        <span class="built_in">int</span> <span class="built_in">random</span> = r.nextInt(len)<span class="comment">;</span>
-        System.out.println(A[<span class="built_in">random</span>])<span class="comment">;</span>
-        swap(A[<span class="built_in">random</span>],A[len])<span class="comment">;</span>
-        len--<span class="comment">;</span>
-    }
-}
-</code></pre><p><em>如果此时题目再变化一下呢？当存储数据的<strong>不是数组，而是链表</strong>，怎么才能利用最低的时间复杂度和空间复杂度选取 K 个数呢</em></p>
-<h3 id="从未知长度的链表里随机选取_k_个数">从未知长度的链表里随机选取 k 个数</h3><p>在无法确定链表长度的情况下，遍历链表的过程中，对第 i 个元素都有两种选择：<strong>选出，不选出</strong>。确保每个元素选出的概率都是 <code>k/n</code> 才是随机的，但是我们并不知道n的大小。</p>
-<p>假如我们按照选取 Top k 的思路，先选择链表的前 k 个元素，将后面的元素按照一定的概率选出替换，最后剩下的 k 个即为随机选择的 k 个。</p>
-<p><strong>以 k/i 的概率选出第 i 个元素替换被选出的 k 个元素（i&gt;k）</strong></p>
-<p>下面证明下这个结论。</p>
-<p>现在我们取出第 i 个元素，随机替换已选出元素中的一个。这个概率是 k/i，那么当对第 i+1 个元素进行操作时，保持第 i 个元素依然在选出的 k 个元素集合中的概率是：</p>
-<p>\[  \frac{k}{i} \Bigl( 1-\frac{k}{i+1}+\frac{k}{i+1} \times \frac{k-1}{k}\Bigr) = \frac{k}{i+1}\]</p>
-<p>递推至 n 即可证明</p>
-<p><strong>上面这个方法的证明方法似乎有点复杂，其实换一种思路，就可以更简单的解决这道题。
-</strong></p>
-<p>首先仍要维护一个大小为 k 的堆，其存放 k 个 random 值最大的节点，这个 random 值是什么呢，就是我们在遍历链表时，对每个节点随机生成一个值，最后选取的即是10个 random 值最大的节点。为什么这种方法可行呢？试想从一副扑克中随机选择5张牌，我们可以在牌堆内随机抽5张，同时我们也可以将这副牌洗一洗，从牌顶拿走5张即可。</p>
-<p>这种简单的思路跟后者有点像吧~</p>
-
-          
+<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/14/pick-numbers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -482,6 +612,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/23/reading-http-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/reading-http-notes/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -503,7 +640,16 @@
       
         
           <blockquote>
-<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。<br>
+<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。</p>
+</blockquote>
+<h1 id="1-网络基础">1.网络基础</h1><h2 id="HTTP1-0_vs_HTTP1-1">HTTP1.0 vs HTTP1.1</h2><p>  目前主流的是HTTP1.1</p>
+<h2 id="TCP/IP">TCP/IP</h2><p>  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。</p>
+<ul>
+<li>应用层  FTP  DNS HTTP</li>
+<li>传输层 TCP UDP</li>
+<li>网络层 </li>
+<li>数据链路层</li>
+</ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/23/reading-http-notes/#more" rel="contents">
               阅读全文 &raquo;
@@ -578,6 +724,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/all-sorts-algorithm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/all-sorts-algorithm/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -674,6 +827,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/package-problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/package-problem/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -777,6 +937,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/16/hello-world-scala/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/16/hello-world-scala/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -872,6 +1039,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/12/xib-modify/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/xib-modify/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -972,6 +1146,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/12/ios-pod-delete-problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/ios-pod-delete-problem/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1068,6 +1249,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/10/about-hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/10/about-hexo/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1163,17 +1351,24 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1308,9 +1503,30 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 

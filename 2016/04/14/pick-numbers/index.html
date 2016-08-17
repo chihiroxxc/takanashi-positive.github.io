@@ -96,7 +96,7 @@
 从海量数据里选取 Top k个数
 最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是O(logn)
 改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若num_i大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂">
-<meta property="og:updated_time" content="2016-08-16T13:12:33.000Z">
+<meta property="og:updated_time" content="2016-08-17T13:03:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从海量数据里选取k个数的相关问题">
 <meta name="twitter:description" content="最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。
@@ -188,6 +188,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -266,6 +276,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/14/pick-numbers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/pick-numbers/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -291,7 +308,7 @@
 <li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
 <li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
 </ul>
-<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em></p>
+<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em><br><a id="more"></a></p>
 <h3 id="从海量数据里随机选取_k_个数">从海量数据里随机选取 k 个数</h3><p><strong>随机选择算法</strong><br>随机选择算法应该是比较容易想到的一种思路，但其依赖于必须知道总共有多少个数据，以及可以在<code>O(1)</code>时间内获取到第i个数据。这样效率才会比较高。</p>
 <p>下面列出的是，从100个数里随机选择10个数的示例代码。</p>
 <pre><code>void printRandom10(<span class="built_in">int</span> A[]) {
@@ -383,6 +400,10 @@
           
   <div class="comments" id="comments">
     
+      <div class="ds-thread" data-thread-key="2016/04/14/pick-numbers/"
+           data-title="从海量数据里选取k个数的相关问题" data-url="http://yoursite.com/2016/04/14/pick-numbers/">
+      </div>
+    
   </div>
 
 
@@ -425,17 +446,24 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -585,9 +613,30 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 

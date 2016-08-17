@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Algorithm,LeetCode," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chihiro's blog">
-<meta property="og:url" content="http://yoursite.com/tags/Scala/index.html">
+<meta name="description" content="Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+Here, we will use the integers 0,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode No.75 Sort Colors">
+<meta property="og:url" content="http://yoursite.com/2016/08/17/sort-colors/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
-<meta property="og:description">
+<meta property="og:description" content="Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+Here, we will use the integers 0,">
+<meta property="og:updated_time" content="2016-08-17T13:18:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chihiro's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="LeetCode No.75 Sort Colors">
+<meta name="twitter:description" content="Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+Here, we will use the integers 0,">
 
 
 
@@ -113,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Scala/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/17/sort-colors/"/>
 
-  <title> 标签: Scala | Chihiro's blog </title>
+  <title> LeetCode No.75 Sort Colors | Chihiro's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +140,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,46 +228,192 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Scala
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode No.75 Sort Colors
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-17T21:00:13+08:00" content="2016-08-17">
+              2016-08-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/17/sort-colors/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/sort-colors/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <blockquote>
+<p>Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.</p>
+<p>Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.</p>
+<p><strong>Could you come up with an one-pass algorithm using only constant space?</strong></p>
+</blockquote>
+<p>一列数字，只包括0，1，2三种，要求在不用比较排序算法的情况下排列成<code>0..01..12..2</code>这种形式，而且只能遍历一边数组（所以不能用统计排序的方法）。</p>
+<p>这时可以想到一种非常简单的策略，遇到0的话把0放在数组的前面，遇到2的话把2放在数组后面，中间的1不做处理。用 <code>end0</code>来标识0序列结尾后的第一个位置，<code>start2</code>来标识2序列开始之前的一个位置。</p>
+<a id="more"></a>
+<p>这个想法很清晰，但是实现的时候会有一些坑需要注意：</p>
+<ul>
+<li>遇到了一个2，和<code>start2</code>的数字进行交换之后，如果换回来的还是2怎么办</li>
+<li>接上一条，换回来的是个0怎么办</li>
+</ul>
+<p>考虑到了这些坑之后就可以写代码了</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{
+    <span class="keyword">int</span> end1 = <span class="number">0</span>,start2 = nums.length-<span class="number">1</span>;
+    <span class="keyword">if</span>(nums.length==<span class="number">0</span>||nums.length==<span class="number">1</span>) <span class="keyword">return</span>;
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;=start2 &amp;&amp; start2&gt;=<span class="number">0</span>;){
+        <span class="keyword">if</span>(nums[i]==<span class="number">0</span>){
+            <span class="comment">//move to head</span>
+            swap(nums,i,end1++);
+        }
+        <span class="keyword">if</span>(nums[i]==<span class="number">2</span>){
+            <span class="comment">//move to end</span>
+            swap(nums,i,start2--);
+        }
+        <span class="keyword">if</span>(nums[i]==<span class="number">1</span>||i&lt;end1) i++;
+    }
+}
+</code></pre><p>我写的代码太丑了，Disscus里有个比较优美的代码(by yidawang)：</p>
+<pre><code>void sortColors(int A[], int n) <span class="comment">{
+    int second=n-1, zero=0;
+    for (int i=0; i&lt;=second; i++) {
+        while (A[i]==2 &amp;&amp; i&lt;second) swap(A[i], A[second--]);
+        while (A[i]==0 &amp;&amp; i&gt;zero) swap(A[i], A[zero++]);
+    }</span>
+}
+</code></pre><p>写完代码需要用些coner case 测一下</p>
+<ul>
+<li>[]</li>
+<li>[0,0,0],[1,1,1],[2,2,2]</li>
+<li>[1,1,2,2],[2,2,0,0],[1,1,0,0]</li>
+</ul>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2015/11/16/hello-world-scala/" itemprop="url">
-              
-                <span itemprop="name">Mac上的使用IDEA构建Play工程</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-11-16T10:39:37+08:00"
-              content="2015-11-16" >
-          11-16
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag">#Algorithm</a>
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/16/binary-indexed-tree/" rel="next" title="树状数组(Binary Indexed Tree)">
+                <i class="fa fa-chevron-left"></i> 树状数组(Binary Indexed Tree)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -271,6 +421,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/17/sort-colors/"
+           data-title="LeetCode No.75 Sort Colors" data-url="http://yoursite.com/2016/08/17/sort-colors/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -290,8 +448,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
@@ -341,6 +508,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -444,6 +622,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
