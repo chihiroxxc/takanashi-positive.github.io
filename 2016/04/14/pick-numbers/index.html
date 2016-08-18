@@ -311,13 +311,13 @@
 <p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em><br><a id="more"></a></p>
 <h3 id="从海量数据里随机选取_k_个数">从海量数据里随机选取 k 个数</h3><p><strong>随机选择算法</strong><br>随机选择算法应该是比较容易想到的一种思路，但其依赖于必须知道总共有多少个数据，以及可以在<code>O(1)</code>时间内获取到第i个数据。这样效率才会比较高。</p>
 <p>下面列出的是，从100个数里随机选择10个数的示例代码。</p>
-<pre><code>void printRandom10(<span class="built_in">int</span> A[]) {
-    <span class="built_in">Random</span> r = new <span class="built_in">Random</span>()<span class="comment">;</span>
-    <span class="built_in">int</span> len = A.length<span class="comment">;</span>
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) {</span>
-        <span class="built_in">int</span> <span class="built_in">random</span> = r.nextInt(len)<span class="comment">;</span>
-        System.out.println(A[<span class="built_in">random</span>])<span class="comment">;</span>
-        swap(A[<span class="built_in">random</span>],A[len])<span class="comment">;</span>
+<pre><code>void printRandom10(int <span class="keyword">A</span>[]) {
+    Random r = new Random()<span class="comment">;</span>
+    int len = <span class="keyword">A</span>.length<span class="comment">;</span>
+    for (int i = 0<span class="comment">; i &lt; 10; i++) {</span>
+        int random = r.nextInt(len)<span class="comment">;</span>
+        System.out.println(<span class="keyword">A</span>[random])<span class="comment">;</span>
+        swap(<span class="keyword">A</span>[random],<span class="keyword">A</span>[len])<span class="comment">;</span>
         len--<span class="comment">;</span>
     }
 }
@@ -446,7 +446,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -454,7 +454,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -463,7 +463,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

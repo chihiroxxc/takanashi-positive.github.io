@@ -335,10 +335,10 @@
 }
 </code></pre><p>有了<code>QuerySum</code>这个函数，我们就可以计算<code>[0...index]</code>的和，如果要计算<code>[i...j]</code>的和，就用<code>QuerySum(j)-QuerySum(i)</code>即可。</p>
 <h4 id="Update">Update</h4><p><code>QuerySum</code> 是自顶向下搜寻相加得到和，而<code>Update</code>函数需要从<code>index</code>开始自底向上，对每一个需要对<code>index</code>负责的点进行更新。</p>
-<pre><code>public void update<span class="comment">(int i, int val)</span>{
-    <span class="keyword">while</span> <span class="comment">(i&lt;=n)</span>{
+<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> val)</span></span>{
+    <span class="keyword">while</span> (i&lt;=n){
         BIT[i] += val;
-        i += <span class="comment">(i &amp; -i)</span>;
+        i += (i &amp; -i);
     }
 }
 </code></pre><h4 id="总结">总结</h4><p><code>BIT</code> 是个小巧精妙的数据结构，需要理解 <code>lowBit</code> 是关键的地方。</p>
@@ -455,7 +455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -463,7 +463,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -472,7 +472,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
