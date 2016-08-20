@@ -1,0 +1,739 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近看了一篇很好的关于 Java 内存模型的文章，所以记下笔记以便日后复习。
+Java Memory Model
+Java 的内存模型决定了 Java Virtual Machine 是如何和计算机的内存协作的。JVM是一个包含了整个机器的模型，所以自然也包括了内存模型，即我们所说的Java内存模型（Java Memory Model）。
+如果你想正确的使用Java的多线程并发机制，你就必须理解J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="［笔记］Java 内存模型">
+<meta property="og:url" content="http://yoursite.com/2016/08/20/note-java-memory-model/index.html">
+<meta property="og:site_name" content="Chihiro's blog">
+<meta property="og:description" content="最近看了一篇很好的关于 Java 内存模型的文章，所以记下笔记以便日后复习。
+Java Memory Model
+Java 的内存模型决定了 Java Virtual Machine 是如何和计算机的内存协作的。JVM是一个包含了整个机器的模型，所以自然也包括了内存模型，即我们所说的Java内存模型（Java Memory Model）。
+如果你想正确的使用Java的多线程并发机制，你就必须理解J">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-1.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-2.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-3.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-4.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-5.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-6.png">
+<meta property="og:updated_time" content="2016-08-20T08:57:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="［笔记］Java 内存模型">
+<meta name="twitter:description" content="最近看了一篇很好的关于 Java 内存模型的文章，所以记下笔记以便日后复习。
+Java Memory Model
+Java 的内存模型决定了 Java Virtual Machine 是如何和计算机的内存协作的。JVM是一个包含了整个机器的模型，所以自然也包括了内存模型，即我们所说的Java内存模型（Java Memory Model）。
+如果你想正确的使用Java的多线程并发机制，你就必须理解J">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/20/note-java-memory-model/"/>
+
+  <title> ［笔记］Java 内存模型 | Chihiro's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chihiro's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ［笔记］Java 内存模型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-20T14:13:41+08:00" content="2016-08-20">
+              2016-08-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/20/note-java-memory-model/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/note-java-memory-model/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近看了一篇很好的关于 Java 内存模型的文章，所以记下笔记以便日后复习。</p>
+<p><a href="http://tutorials.jenkov.com/java-concurrency/java-memory-model.html#javas-logic-memory-model" target="_blank" rel="external">Java Memory Model</a></p>
+<p>Java 的内存模型决定了 <strong>J</strong>ava <strong>V</strong>irtual <strong>M</strong>achine 是如何和计算机的内存协作的。JVM是一个包含了整个机器的模型，所以自然也包括了内存模型，即我们所说的Java内存模型（<strong>J</strong>ava <strong>M</strong>emory <strong>M</strong>odel）。</p>
+<p>如果你想正确的使用Java的多线程并发机制，你就必须理解JMM，因为JMM指定了多线程是如何协作的，比如一个线程是怎样看到一个共享的变量被其他线程修改，或者是如何在必要的时候同步共享的变量。</p>
+<h1 id="JMM">JMM</h1><hr>
+<p>JMM在JVM内部将内存分为了<strong>线程栈</strong>和<strong>堆</strong>两部分。如下图。</p>
+<p><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-1.png" alt="image"></p>
+<p>每个运行在JVM中的线程都有一个自己的线程栈，其中包括了调用过的方法的信息。我们可以把它叫做“调用堆栈”，当线程执行它的代码，调用堆栈就会被改变。</p>
+<p>栈里面还保存了方法中所用到的所有局部变量。<strong>一个线程只能访问自己的栈，而栈中的变量也只能为该线程所见</strong>。就算两个线程执行了同一段代码，也会在各自的线程栈中访问所需要的局部变量。</p>
+<a id="more"></a>
+<p>基本数据类型(<code>int</code> <code>byte</code> <code>double</code> <code>float</code> <code>boolean</code> <code>long</code> <code>char</code> <code>short</code>)的局部变量全都被存储在线程栈中，并且对其他线程也是不可见的。一个线程可以给另一个线程传递一个变量的副本，但是依然无法和其他线程共享变量本身。</p>
+<p>而<strong>堆</strong>中存储了所有的对象，不论是哪个线程创建的，而且也包括基本数据类型的装箱类型(比如<code>int</code>和<code>Integer</code>,<code>Integer</code>就是装箱类型)。</p>
+<p>下面这张图展示了局部变量和对象是如何存储的。<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-2.png" alt="image"></p>
+<p>那如果一个局部变量是一个对象呢，或者一个对象里面包含了方法呢？</p>
+<ul>
+<li>如果一个局部变量是基本数据类型的，会被完全保存在栈里</li>
+<li>如果一个局部变量是对象，它的引用会被保存在栈里，而对象本身会被保存在堆里</li>
+<li>对象包含的方法可能会含有局部变量，这些局部变量将会被保存在栈里，即使它们属于一个在栈中的对象里的方法</li>
+<li>对象的成员变量和对象一起保存在堆中，不论这个成员变量的类型是什么</li>
+<li>静态类变量被保存在堆中</li>
+</ul>
+<p>下面一张图展示了两个线程同时引用一个对象的情况<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-3.png" alt=""></p>
+<p>如图所示，两个线程都有一个局部变量<code>Local variable 2</code>指向堆中的一个对象<code>Object 3</code>. 这两个线程对这个对象的引用是不同的，而且存储在两个线程栈中，但是其指向的对象却是相同的。</p>
+<p><code>Object 2</code>和<code>Object 4</code>是<code>Object 3</code>的成员变量，两个线程可以通过<code>Object 3</code>访问<code>Object 2</code>和<code>Object 4</code>。</p>
+<p>这张图还描述了两个线程的局部变量指向不同对象的情况。<code>methodTwo</code>中的<code>Local variable 1</code>分别指向<code>Object 1</code>,<code>Object 5</code>。</p>
+<p>下面还有段代码的示例，描述了上图的这种情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class MyRunnable implements <span class="title">Runnable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        methodOne();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> localVariable1 = <span class="number">45</span>;</span><br><span class="line">        MySharedObject localVariable2 = MySharedObject.sharedInstance;</span><br><span class="line">        <span class="comment">//... do more with local variables.</span></span><br><span class="line">        methodTwo();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodTwo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Integer localVariable1 = <span class="keyword">new</span> Integer(<span class="number">99</span>);</span><br><span class="line">        <span class="comment">//... do more with local variable.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySharedObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">//static variable pointing to instance of MySharedObject</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MySharedObject sharedInstance =</span><br><span class="line">        <span class="keyword">new</span> MySharedObject();</span><br><span class="line">    <span class="comment">//member variables pointing to two objects on the heap</span></span><br><span class="line">    <span class="keyword">public</span> Integer object2 = <span class="keyword">new</span> Integer(<span class="number">22</span>);</span><br><span class="line">    <span class="keyword">public</span> Integer object4 = <span class="keyword">new</span> Integer(<span class="number">44</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> member1 = <span class="number">12345</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> member1 = <span class="number">67890</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果两个线程执行了<code>run()</code>，那么上图所示的情况就会发生。我们先来看<code>methodOne()</code></p>
+<ul>
+<li><code>localVariable1</code>是基本数据类型，会存储在栈中</li>
+<li><code>localVariable2</code>是指向一个类型为<code>MySharedObject</code>的对象，对象会被存储在堆中，引用会被存储在栈中。由于指向的对象是一个静态类型的，所以内存中只会有一个实例，所以就出现了图中两个线程的局部变量指向了一个对象的情况。</li>
+<li><code>MySharedObject</code>还有四个成员变量，他们不论类型都将存储在堆中</li>
+</ul>
+<p>再来分析<code>methodTwo()</code>，只含有一个<code>Integer</code>类型的局部变量<code>localVariable1</code>，并且也是非静态的，所以当有多个线程执行<code>methodTow()</code>的时候，将会有多个<code>localVariable1</code>存在在内存中。如上图所述的<code>Object1</code>和<code>Object5</code>。</p>
+<p>经过一个实例的分析，对于JMM的理解应该更清晰了吧。</p>
+<h1 id="硬件内存架构">硬件内存架构</h1><hr>
+<p>现代的硬件内存架构(<strong>H</strong>ardware <strong>M</strong>emory <strong>A</strong>rchitecture)跟JMM是有些区别的，我们还要理解硬件内存架构，理解JMM是如何在与其协作的。</p>
+<p>下图展示了一个简化版的HMA：</p>
+<p><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-4.png" alt=""></p>
+<p>现代计算机通常有两个以上的CPU，有些CPU还是多核的。所以在CPU大于1的情况下，很有可能又多个线程<strong>同时</strong>在运行。</p>
+<p>每个CPU包含了一系列的寄存器，寄存器可以使CPU的操作速度更快，相比于在RAM(<strong>R</strong>andom <strong>B</strong>ccess <strong>M</strong>emory)来说。这是因为CPU可以更快的访问寄存器。</p>
+<p>大部分CPU还有一个CPU缓存层，缓存层的访问速度比RAM要快，但是没有寄存器快。有的CPU还有可能有多级缓存层。</p>
+<p>RAM就是计算机都有的主内存控件，要比缓存大多了，所有CPU都可以访问RAM。</p>
+<h1 id="桥接_HMA_与_JMM">桥接 HMA 与 JMM</h1><hr>
+<p>现在我们知道了HMA并不像JMM一样区分栈和堆，栈和堆都有可能被存储在CPU,缓存和RAM中。如下图所示<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-5.png" alt=""></p>
+<p>当对象、变量可能被存储在计算机的不同区域时，有可能会出现两个主要问题</p>
+<ul>
+<li>线程对于共享变量的可见性（读、写）</li>
+<li>条件竞争</li>
+</ul>
+<h2 id="可见性">可见性</h2><p>用一个例子来说明可见性的问题：</p>
+<p><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-6.png" alt=""></p>
+<p>如上图所示，左边的CPU将<code>obj</code>拷贝至缓存，并将其count值修改为2，在还没有将<code>obj</code>存回至RAM的时候，右边的CPU读取了<code>obj</code>的<code>count</code>，这时候的值是1，是还没有更新的值。</p>
+<p>为了避免这种情况的发生，需要使用关键字<code>volatile</code>，这个关键字保证了将从RAM中读取数据，并且在修改后会被写回RAM。</p>
+<h2 id="条件竞争">条件竞争</h2><p>当两个或以上的线程同时修改了一个共享的变量时，条件竞争就可能发生。</p>
+<p>比如当<code>Thread1</code>和<code>Thread2</code>同时将一个变量读至缓存并进行<code>+1</code>操作，当它们把操作写回RAM时，变量将会被<code>+2</code>。所以为了避免条件竞争的发生，可以使用java的同步机制，<code>synchronize</code>关键字。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/19/leetcode-lru-cache/" rel="next" title="LeetCode No.146 LRU Cache">
+                <i class="fa fa-chevron-left"></i> LeetCode No.146 LRU Cache
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/20/note-java-memory-model/"
+           data-title="［笔记］Java 内存模型" data-url="http://yoursite.com/2016/08/20/note-java-memory-model/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
+               alt="Chang Xu" />
+          <p class="site-author-name" itemprop="name">Chang Xu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">1.</span> <span class="nav-text">JMM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件内存架构"><span class="nav-number">2.</span> <span class="nav-text">硬件内存架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#桥接_HMA_与_JMM"><span class="nav-number">3.</span> <span class="nav-text">桥接 HMA 与 JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可见性"><span class="nav-number">3.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件竞争"><span class="nav-number">3.2.</span> <span class="nav-text">条件竞争</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chang Xu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

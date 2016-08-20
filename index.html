@@ -248,6 +248,136 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/20/note-java-memory-model/" itemprop="url">
+                  ［笔记］Java 内存模型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-20T14:13:41+08:00" content="2016-08-20">
+              2016-08-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/20/note-java-memory-model/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/note-java-memory-model/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近看了一篇很好的关于 Java 内存模型的文章，所以记下笔记以便日后复习。</p>
+<p><a href="http://tutorials.jenkov.com/java-concurrency/java-memory-model.html#javas-logic-memory-model">Java Memory Model</a></p>
+<p>Java 的内存模型决定了 <strong>J</strong>ava <strong>V</strong>irtual <strong>M</strong>achine 是如何和计算机的内存协作的。JVM是一个包含了整个机器的模型，所以自然也包括了内存模型，即我们所说的Java内存模型（<strong>J</strong>ava <strong>M</strong>emory <strong>M</strong>odel）。</p>
+<p>如果你想正确的使用Java的多线程并发机制，你就必须理解JMM，因为JMM指定了多线程是如何协作的，比如一个线程是怎样看到一个共享的变量被其他线程修改，或者是如何在必要的时候同步共享的变量。</p>
+<h1 id="JMM">JMM</h1><hr>
+<p>JMM在JVM内部将内存分为了<strong>线程栈</strong>和<strong>堆</strong>两部分。如下图。</p>
+<p><img src="http://tutorials.jenkov.com/images/java-concurrency/java-memory-model-1.png" alt="image"></p>
+<p>每个运行在JVM中的线程都有一个自己的线程栈，其中包括了调用过的方法的信息。我们可以把它叫做“调用堆栈”，当线程执行它的代码，调用堆栈就会被改变。</p>
+<p>栈里面还保存了方法中所用到的所有局部变量。<strong>一个线程只能访问自己的栈，而栈中的变量也只能为该线程所见</strong>。就算两个线程执行了同一段代码，也会在各自的线程栈中访问所需要的局部变量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/20/note-java-memory-model/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/19/leetcode-lru-cache/" itemprop="url">
                   LeetCode No.146 LRU Cache
                 </a>
@@ -1286,112 +1416,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/12/xib-modify/" itemprop="url">
-                  修改xib无效，运行后修改没有显示的问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-12T21:37:09+08:00" content="2015-11-12">
-              2015-11-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/12/xib-modify/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/xib-modify/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>曾经被问到这样一个问题，明明修改了xib文件，但是运行之后却依然显示修改之前的xib，甚至删除了xib中的某个控件，也依然会显示出来。</p>
-<p>试了Clean Project，删除模拟器/真机中的app，依然无用。此时我想到可能是xcode的缓存问题，打开<strong>Xcode-&gt;Preference</strong>,找到缓存地址</p>
-<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/C48656DA-762D-45DE-89C3-AF0BA5138788.png?imageView/2/w/700/q/100" alt=""></p>
-<p>打开缓存文件夹，找到对应项目的文件夹删除之，重新运行，ok了。</p>
-<p>有时候很多问题都是缓存文件搞得鬼。但是这种xib不能修改一般不会出现，遇到了两次都是在xcode版本不同的时候进行协同开发时出现的。 </p>
-<p>而且xcode的缓存文件很大，如果工程很多可以定期删除一次。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1437,7 +1461,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1445,7 +1469,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1454,7 +1478,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

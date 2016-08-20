@@ -248,6 +248,112 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/12/xib-modify/" itemprop="url">
+                  修改xib无效，运行后修改没有显示的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-12T21:37:09+08:00" content="2015-11-12">
+              2015-11-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/12/xib-modify/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/xib-modify/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>曾经被问到这样一个问题，明明修改了xib文件，但是运行之后却依然显示修改之前的xib，甚至删除了xib中的某个控件，也依然会显示出来。</p>
+<p>试了Clean Project，删除模拟器/真机中的app，依然无用。此时我想到可能是xcode的缓存问题，打开<strong>Xcode-&gt;Preference</strong>,找到缓存地址</p>
+<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/C48656DA-762D-45DE-89C3-AF0BA5138788.png?imageView/2/w/700/q/100" alt=""></p>
+<p>打开缓存文件夹，找到对应项目的文件夹删除之，重新运行，ok了。</p>
+<p>有时候很多问题都是缓存文件搞得鬼。但是这种xib不能修改一般不会出现，遇到了两次都是在xcode版本不同的时候进行协同开发时出现的。 </p>
+<p>而且xcode的缓存文件很大，如果工程很多可以定期删除一次。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/12/ios-pod-delete-problem/" itemprop="url">
                   Pod无法彻底删除依赖包的问题
                 </a>
@@ -480,7 +586,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -488,7 +594,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -497,7 +603,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
