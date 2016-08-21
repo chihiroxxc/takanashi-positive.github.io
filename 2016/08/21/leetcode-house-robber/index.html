@@ -1,0 +1,719 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Algorithm,Dynamic Programming,LeetCode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="House Robber I
+
+给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
+
+一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
+用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
+dp[i][0] = Math.max(dp[i-1][">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode House Robber I.II.III">
+<meta property="og:url" content="http://yoursite.com/2016/08/21/leetcode-house-robber/index.html">
+<meta property="og:site_name" content="Chihiro's blog">
+<meta property="og:description" content="House Robber I
+
+给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
+
+一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
+用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
+dp[i][0] = Math.max(dp[i-1][">
+<meta property="og:updated_time" content="2016-08-21T16:02:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode House Robber I.II.III">
+<meta name="twitter:description" content="House Robber I
+
+给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
+
+一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
+用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
+dp[i][0] = Math.max(dp[i-1][">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/21/leetcode-house-robber/"/>
+
+  <title> LeetCode House Robber I.II.III | Chihiro's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chihiro's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode House Robber I.II.III
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-21T10:49:48+08:00" content="2016-08-21">
+              2016-08-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/21/leetcode-house-robber/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/21/leetcode-house-robber/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="House_Robber_I">House Robber I</h1><hr>
+<blockquote>
+<p>给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。<br>如果两个相邻的房子在同一晚被偷就会自动报警。<br>如何在不惊动警察的情况下偷到最多的钱？</p>
+</blockquote>
+<p>一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。</p>
+<p>用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。</p>
+<pre><code>dp[<span class="link_label">i</span>][<span class="link_reference">0</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>])
+dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>] + num[i] //num是代表每家财产的数组
+</code></pre><p>分析这个状态转移方程可以得知，当前的最优解只跟前一个的最优解有关，所以优化空间复杂度得到以下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> preNo = <span class="number">0</span>; <span class="comment">//前一个没被偷得到的最大值</span></span><br><span class="line">	<span class="keyword">int</span> preYes = <span class="number">0</span>; <span class="comment">//前一个被偷了得到的最大值</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = preNo;</span><br><span class="line">		preNo = Math.max(temp,preYes); <span class="comment">//preNo被更新为当前房子没被偷的最大值</span></span><br><span class="line">		preYes = temp + nums[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Math.max(preNo, preYes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="HouseRobber_II">HouseRobber II</h1><hr>
+<p>II是I的扩展题目，改变了房子的布局，由一列变成了一圈，这样与第一题不同的是，当你选择了第一个房子时，最后一个房子的选择就会受到影响</p>
+<p>所以可以考虑两种情况:考虑第一个房子和不考虑第一个房子。</p>
+<p>那么这个问题将会转化为两个子问题</p>
+<ul>
+<li>求<code>1...n-1</code>号房子排成一列的情况下能获得的最大值</li>
+<li>求<code>2...n</code>号房子排成一列情况下能获得的最大值</li>
+</ul>
+<p>再求两个子问题其中的最大解即可</p>
+<p>将I中得到的解稍作修改就可以作为问题II的辅助函数<code>int rob_range(int[] nums,int start, int end)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> Math.max(rob_range(nums,<span class="number">0</span>,nums.length-<span class="number">2</span>),rob_range(nums,<span class="number">1</span>,nums.length-<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="HouseRobber_III">HouseRobber III</h1><hr>
+<p>第三题又在第一题的基础上修改了房子的布局，变成了树形</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">3</span></span><br><span class="line"> / \</span><br><span class="line"><span class="number">2</span>   <span class="number">3</span></span><br><span class="line"> \   \ </span><br><span class="line">  <span class="number">3</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>上面是举了个栗子，不能rob相连的节点，如果rob了父节点，就不能rob子节点</p>
+<h2 id="简单的递归">简单的递归</h2><p>最容易想到的思路就是递归，树是个很容易让人联想到递归的数据结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">        val += rob(root.left.left) + rob(root.left.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        val += rob(root.right.left) + rob(root.right.right);</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">return</span> Math.max(val + root.val, rob(root.left) + rob(root.right));</span><br></pre></td></tr></table></figure>
+<h2 id="利用重叠子问题减少时间复杂度">利用重叠子问题减少时间复杂度</h2><p>在上面的解法，很多被重复计算了很多次，我们完全可以在第一次计算节点的最大值rob值时将其记录下来，如果再次需要计算该节点，直接读取即可。</p>
+<p>所以加入了<code>HashMap</code>后时间复杂度得到了优化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Map&lt;TreeNode, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">return</span> robSub(root, map);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">robSub</span><span class="params">(TreeNode root, Map&lt;TreeNode, Integer&gt; map)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (map.containsKey(root)) <span class="keyword">return</span> map.get(root);</span><br><span class="line">    <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">        val += robSub(root.left.left, map) + robSub(root.left.right, map);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        val += robSub(root.right.left, map) + robSub(root.right.right, map);</span><br><span class="line">    &#125;</span><br><span class="line">    val = Math.max(val + root.val, robSub(root.left, map) + robSub(root.right, map));</span><br><span class="line">    map.put(root, val); </span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最优解（比较难想出来）">最优解（比较难想出来）</h2><p>利用<code>HashMap</code>后时间复杂度虽然得到了优化，但是空间复杂度却上升，能不能再优化一下呢？<br>我们再回想I,II两个问题，对于某一节点来说，rob的最大值就是<code>Math.max(rob该节点，不rob该节点)</code>。<br>如果我们能够像I,II一样记录每个节点的对应的这两种信息，空间复杂度就可以得到最大程度的优化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>[] res = robSub(root);</span><br><span class="line">    <span class="keyword">return</span> Math.max(res[<span class="number">0</span>], res[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] robSub(TreeNode root) &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] left = robSub(root.left);</span><br><span class="line">    <span class="keyword">int</span>[] right = robSub(root.right);</span><br><span class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    res[<span class="number">0</span>] = Math.max(left[<span class="number">0</span>], left[<span class="number">1</span>]) + Math.max(right[<span class="number">0</span>], right[<span class="number">1</span>]);</span><br><span class="line">    res[<span class="number">1</span>] = root.val + left[<span class="number">0</span>] + right[<span class="number">0</span>]; </span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag">#Algorithm</a>
+          
+            <a href="/tags/Dynamic-Programming/" rel="tag">#Dynamic Programming</a>
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/note-java-memory-model/" rel="next" title="［笔记］Java 内存模型">
+                <i class="fa fa-chevron-left"></i> ［笔记］Java 内存模型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/21/leetcode-house-robber/"
+           data-title="LeetCode House Robber I.II.III" data-url="http://yoursite.com/2016/08/21/leetcode-house-robber/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
+               alt="Chang Xu" />
+          <p class="site-author-name" itemprop="name">Chang Xu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#House_Robber_I"><span class="nav-number">1.</span> <span class="nav-text">House Robber I</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HouseRobber_II"><span class="nav-number">2.</span> <span class="nav-text">HouseRobber II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HouseRobber_III"><span class="nav-number">3.</span> <span class="nav-text">HouseRobber III</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的递归"><span class="nav-number">3.1.</span> <span class="nav-text">简单的递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用重叠子问题减少时间复杂度"><span class="nav-number">3.2.</span> <span class="nav-text">利用重叠子问题减少时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最优解（比较难想出来）"><span class="nav-number">3.3.</span> <span class="nav-text">最优解（比较难想出来）</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chang Xu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

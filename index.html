@@ -248,6 +248,137 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/21/leetcode-house-robber/" itemprop="url">
+                  LeetCode House Robber I.II.III
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-21T10:49:48+08:00" content="2016-08-21">
+              2016-08-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/21/leetcode-house-robber/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/21/leetcode-house-robber/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="House_Robber_I">House Robber I</h1><hr>
+<blockquote>
+<p>给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。<br>如果两个相邻的房子在同一晚被偷就会自动报警。<br>如何在不惊动警察的情况下偷到最多的钱？</p>
+</blockquote>
+<p>一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。</p>
+<p>用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。</p>
+<pre><code>dp[<span class="link_label">i</span>][<span class="link_reference">0</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>])
+dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>] + num[i] //num是代表每家财产的数组
+</code></pre><p>分析这个状态转移方程可以得知，当前的最优解只跟前一个的最优解有关，所以优化空间复杂度得到以下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> preNo = <span class="number">0</span>; <span class="comment">//前一个没被偷得到的最大值</span></span><br><span class="line">	<span class="keyword">int</span> preYes = <span class="number">0</span>; <span class="comment">//前一个被偷了得到的最大值</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = preNo;</span><br><span class="line">		preNo = Math.max(temp,preYes); <span class="comment">//preNo被更新为当前房子没被偷的最大值</span></span><br><span class="line">		preYes = temp + nums[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Math.max(preNo, preYes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/21/leetcode-house-robber/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/20/note-java-memory-model/" itemprop="url">
                   ［笔记］Java 内存模型
                 </a>
@@ -1313,109 +1444,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/16/hello-world-scala/" itemprop="url">
-                  Mac上的使用IDEA构建Play工程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-16T10:39:37+08:00" content="2015-11-16">
-              2015-11-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/16/hello-world-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/16/hello-world-scala/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近在实验室里决定参与一下后端开发的项目，由于实验室采用的是<code>Scala</code>+<code>Play framework</code>，所以今天配置了相关的开发环境。过程还是很简单的<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/16/hello-world-scala/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1461,7 +1489,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1469,7 +1497,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1478,7 +1506,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
