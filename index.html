@@ -248,6 +248,155 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/22/note-java-string/" itemprop="url">
+                  ［笔记］面试中常见的java String相关问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T23:22:18+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/22/note-java-string/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/22/note-java-string/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>面试中经常会问到关于java中String的问题，String是个非常常用的类，关于String问题不容忽视</p>
+<p>java中的String和其他语言一样，也是字符序列，但是对java来说，String更像是一个字符序列(char sequence)的辅助类。String用以下几个变量来维护字符序列</p>
+<p>存储字符序列的数组：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="built_in">char</span> <span class="keyword">value</span>[];
+</code></pre><p>value数组对应的起始位置的偏移量：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> offset;
+</code></pre><p>value数组对应的字符个数：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="keyword">count</span>;
+</code></pre><p>偏移量不一定为0，对应的字符个数也不一定为<code>value.length</code></p>
+<h2 id="为什么String类是不可变的(Immutable)">为什么String类是不可变的(Immutable)</h2><hr>
+<ul>
+<li><p>第一个原因是为了提高性能。 应用程序往往包含了非常多的String, 标签，消息，设置，等等。JVM的设计者们想出了一个<strong>String 常量池</strong>的概念，常量池也就是一系列string的集合（大部分的值都是唯一的），常量池可以提供String的复用。如果一个String被创建了20次，那么在常量池中将会只有一个实例存在。</p>
+</li>
+<li><p>第二个原因是为了安全起见，String类不允许其他类继承。<br>因为String类对于Java来说是一个非常常用而且重要的类，随意继承可能会引起意想不到的问题。</p>
+</li>
+</ul>
+<h2 id="字符串常量池(String_pool)">字符串常量池(String pool)</h2><hr>
+<p>String pool 是一个堆之外的存储区域，在那里存储的全都是字符常量，这些常量会被字符串变量引用。</p>
+<p>在java中，我们有几种方式来创建一个String</p>
+<h3 id="直接赋值">直接赋值</h3><pre><code><span class="keyword">String </span><span class="keyword">str </span>= <span class="string">"abc"</span><span class="comment">;</span>
+</code></pre><p>这种创建方式将会调用JVM去确认在常量池中是否已经有<code>&quot;abc&quot;</code>存在，如果存在的话，只需要把引用赋给<code>str</code>即可，如果不存在，一个新的字符串常量将会被创建。</p>
+<h3 id="使用关键字new来创建">使用关键字<code>new</code>来创建</h3><pre><code><span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">new</span> <span class="keyword">String</span>(<span class="string">"abc"</span>);
+</code></pre><p>这种方式将会最终在内存中创建两个对象，一个是常量池中的<code>&quot;abc&quot;</code>，另一个是堆中的和<code>&quot;abc&quot;</code>拥有一致序列的字符串对象，<code>str</code>将会指向这个对象。</p>
+<blockquote>
+<p>java doc中建议：除非真的需要copy一个String，否则不需要使用<code>new</code>关键字来创建对象。</p>
+</blockquote>
+<h2 id="可能会造成的内存泄漏">可能会造成的内存泄漏</h2><hr>
+<p>当使用<code>substring</code>时，会创建一个新的String对象，但是<code>values[]</code>不会改变，只是会更新<code>offset</code>和<code>count</code>值。</p>
+<h2 id="参考">参考</h2><hr>
+<p><a href="http://howtodoinjava.com/core-java/string-class/interview-stuff-about-string-class-in-java/" target="_blank" rel="external">Java String Interview Questions and Answers</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/21/leetcode-house-robber/" itemprop="url">
                   LeetCode House Robber I.II.III
                 </a>
@@ -1335,115 +1484,6 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/17/package-problem/" itemprop="url">
-                  背包问题总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-17T11:34:08+08:00" content="2016-03-17">
-              2016-03-17
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/17/package-problem/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/package-problem/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>背包问题是动态规划的基础问题之一。最基础的三个背包问题是：</p>
-<ul>
-<li>01背包</li>
-<li>部分背包</li>
-<li>完全背包</li>
-</ul>
-<h3 id="01背包">01背包</h3><p>01背包描述了这样一个问题：一组物品，其重量分别是 w[i], 价值分别是 v[i], 现有一个承重为 w_total 的背包，求在不超过背包容量的情况下，所容纳的物品价值的最大值是多少，<strong>每种物品有且只有一个，不能分割</strong>。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/17/package-problem/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1489,7 +1529,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

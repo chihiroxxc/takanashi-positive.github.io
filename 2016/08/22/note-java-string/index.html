@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Play,Scala," />
+  <meta name="keywords" content="Java,笔记," />
 
 
 
@@ -84,21 +84,28 @@
 
 
 
-<meta name="description" content="最近在实验室里决定参与一下后端开发的项目，由于实验室采用的是Scala+Play framework，所以今天配置了相关的开发环境。过程还是很简单的">
+<meta name="description" content="面试中经常会问到关于java中String的问题，String是个非常常用的类，关于String问题不容忽视
+java中的String和其他语言一样，也是字符序列，但是对java来说，String更像是一个字符序列(char sequence)的辅助类。String用以下几个变量来维护字符序列
+存储字符序列的数组：
+private final char value[];
+value数组对应的起始位">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac上的使用IDEA构建Play工程">
-<meta property="og:url" content="http://yoursite.com/2015/11/16/hello-world-scala/index.html">
+<meta property="og:title" content="［笔记］面试中常见的java String相关问题">
+<meta property="og:url" content="http://yoursite.com/2016/08/22/note-java-string/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
-<meta property="og:description" content="最近在实验室里决定参与一下后端开发的项目，由于实验室采用的是Scala+Play framework，所以今天配置了相关的开发环境。过程还是很简单的">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/1F2D9545-5E9B-431A-9E41-29219B1780E2.jpeg">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/BF6242A0-BD55-4CAB-B33E-117FAB6E892E.jpeg">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/E88C3D03-0A7A-44E6-B1CE-CB8ECDFDC262.jpeg">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/292D7CCA-C13B-4588-A082-90FDA61EDD1A.jpeg">
-<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/CA8F1D95-3E06-4DA8-A704-BC7F5402C9CC.jpeg">
-<meta property="og:updated_time" content="2016-08-15T14:26:08.000Z">
+<meta property="og:description" content="面试中经常会问到关于java中String的问题，String是个非常常用的类，关于String问题不容忽视
+java中的String和其他语言一样，也是字符序列，但是对java来说，String更像是一个字符序列(char sequence)的辅助类。String用以下几个变量来维护字符序列
+存储字符序列的数组：
+private final char value[];
+value数组对应的起始位">
+<meta property="og:updated_time" content="2016-08-22T15:32:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac上的使用IDEA构建Play工程">
-<meta name="twitter:description" content="最近在实验室里决定参与一下后端开发的项目，由于实验室采用的是Scala+Play framework，所以今天配置了相关的开发环境。过程还是很简单的">
+<meta name="twitter:title" content="［笔记］面试中常见的java String相关问题">
+<meta name="twitter:description" content="面试中经常会问到关于java中String的问题，String是个非常常用的类，关于String问题不容忽视
+java中的String和其他语言一样，也是字符序列，但是对java来说，String更像是一个字符序列(char sequence)的辅助类。String用以下几个变量来维护字符序列
+存储字符序列的数组：
+private final char value[];
+value数组对应的起始位">
 
 
 
@@ -119,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/11/16/hello-world-scala/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/22/note-java-string/"/>
 
-  <title> Mac上的使用IDEA构建Play工程 | Chihiro's blog </title>
+  <title> ［笔记］面试中常见的java String相关问题 | Chihiro's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +258,7 @@
             
             
               
-                Mac上的使用IDEA构建Play工程
+                ［笔记］面试中常见的java String相关问题
               
             
           </h1>
@@ -263,19 +270,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-16T10:39:37+08:00" content="2015-11-16">
-              2015-11-16
+            <time itemprop="dateCreated" datetime="2016-08-22T23:22:18+08:00" content="2016-08-22">
+              2016-08-22
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/16/hello-world-scala/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/16/hello-world-scala/" itemprop="commentsCount"></span>
+                <a href="/2016/08/22/note-java-string/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/22/note-java-string/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -298,11 +324,36 @@
       
 
       
-        <p>最近在实验室里决定参与一下后端开发的项目，由于实验室采用的是<code>Scala</code>+<code>Play framework</code>，所以今天配置了相关的开发环境。过程还是很简单的<br><a id="more"></a></p>
-<h3 id="安装JDK">安装JDK</h3><p>Scala作为Java虚拟机语言(JVM Language)，与Java一样需要Java虚拟机才能编译和运行，因此开发者须首先安装Java开发工具包。<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk6u37-downloads-1859587.html" target="_blank" rel="external">官网</a>下载安装即可。</p>
-<h3 id="安装IDEA">安装IDEA</h3><p>安装IDEA本来也是非常简单的，但是我在安装时选择了最新的<strong>IDEA 15社区版</strong>，导致了我后面几个小时的纠结，因为<strong>社区版并不支持play框架！！！</strong>（为什么没有人提醒我一下。。）<br><img src="http://7xo9w5.com1.z0.glb.clouddn.com/1F2D9545-5E9B-431A-9E41-29219B1780E2.jpeg" alt="折腾了几个小时才发现"><br>所以请选用收费版，如果是学生应该可以用学号申请到一年的试用期，非学生的话嘛，只要找一个注册码了。</p>
-<h3 id="安装插件">安装插件</h3><p>在IDEA上构建Play项目只需要安装<code>Scala插件</code>即可，我还安装了<code>SBT</code>，尽管前者中已经集成了SBT。<br><img src="http://7xo9w5.com1.z0.glb.clouddn.com/BF6242A0-BD55-4CAB-B33E-117FAB6E892E.jpeg" alt=""><br>安装完毕后在<code>/UserName</code>中会出现<code>.ivy2</code>的文件夹，其中缓存了SBT下载的相关依赖，可以拷贝其他同学的该文件夹覆盖一下，节约下载时间。</p>
-<h3 id="Hello_world">Hello world</h3><p>新建一个Play工程，此处SBT构建项目可能需要一些时间。<br><img src="http://7xo9w5.com1.z0.glb.clouddn.com/E88C3D03-0A7A-44E6-B1CE-CB8ECDFDC262.jpeg" alt=""><br>然后配置一下就可以Run了。<br><img src="http://7xo9w5.com1.z0.glb.clouddn.com/292D7CCA-C13B-4588-A082-90FDA61EDD1A.jpeg" alt=""><br>之后在localhost:9000即可看到激动人心的Welcome to play<br><img src="http://7xo9w5.com1.z0.glb.clouddn.com/CA8F1D95-3E06-4DA8-A704-BC7F5402C9CC.jpeg" alt=""></p>
+        <p>面试中经常会问到关于java中String的问题，String是个非常常用的类，关于String问题不容忽视</p>
+<p>java中的String和其他语言一样，也是字符序列，但是对java来说，String更像是一个字符序列(char sequence)的辅助类。String用以下几个变量来维护字符序列</p>
+<p>存储字符序列的数组：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="built_in">char</span> <span class="keyword">value</span>[];
+</code></pre><p>value数组对应的起始位置的偏移量：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> offset;
+</code></pre><p>value数组对应的字符个数：</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="keyword">count</span>;
+</code></pre><p>偏移量不一定为0，对应的字符个数也不一定为<code>value.length</code></p>
+<h2 id="为什么String类是不可变的(Immutable)">为什么String类是不可变的(Immutable)</h2><hr>
+<ul>
+<li><p>第一个原因是为了提高性能。 应用程序往往包含了非常多的String, 标签，消息，设置，等等。JVM的设计者们想出了一个<strong>String 常量池</strong>的概念，常量池也就是一系列string的集合（大部分的值都是唯一的），常量池可以提供String的复用。如果一个String被创建了20次，那么在常量池中将会只有一个实例存在。</p>
+</li>
+<li><p>第二个原因是为了安全起见，String类不允许其他类继承。<br>因为String类对于Java来说是一个非常常用而且重要的类，随意继承可能会引起意想不到的问题。</p>
+</li>
+</ul>
+<h2 id="字符串常量池(String_pool)">字符串常量池(String pool)</h2><hr>
+<p>String pool 是一个堆之外的存储区域，在那里存储的全都是字符常量，这些常量会被字符串变量引用。</p>
+<p>在java中，我们有几种方式来创建一个String</p>
+<h3 id="直接赋值">直接赋值</h3><pre><code><span class="keyword">String </span><span class="keyword">str </span>= <span class="string">"abc"</span><span class="comment">;</span>
+</code></pre><p>这种创建方式将会调用JVM去确认在常量池中是否已经有<code>&quot;abc&quot;</code>存在，如果存在的话，只需要把引用赋给<code>str</code>即可，如果不存在，一个新的字符串常量将会被创建。</p>
+<h3 id="使用关键字new来创建">使用关键字<code>new</code>来创建</h3><pre><code><span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">new</span> <span class="keyword">String</span>(<span class="string">"abc"</span>);
+</code></pre><p>这种方式将会最终在内存中创建两个对象，一个是常量池中的<code>&quot;abc&quot;</code>，另一个是堆中的和<code>&quot;abc&quot;</code>拥有一致序列的字符串对象，<code>str</code>将会指向这个对象。</p>
+<blockquote>
+<p>java doc中建议：除非真的需要copy一个String，否则不需要使用<code>new</code>关键字来创建对象。</p>
+</blockquote>
+<h2 id="可能会造成的内存泄漏">可能会造成的内存泄漏</h2><hr>
+<p>当使用<code>substring</code>时，会创建一个新的String对象，但是<code>values[]</code>不会改变，只是会更新<code>offset</code>和<code>count</code>值。</p>
+<h2 id="参考">参考</h2><hr>
+<p><a href="http://howtodoinjava.com/core-java/string-class/interview-stuff-about-string-class-in-java/" target="_blank" rel="external">Java String Interview Questions and Answers</a></p>
 
       
     </div>
@@ -325,9 +376,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Play/" rel="tag">#Play</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/Scala/" rel="tag">#Scala</a>
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
           
         </div>
       
@@ -336,17 +387,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/12/xib-modify/" rel="next" title="修改xib无效，运行后修改没有显示的问题">
-                <i class="fa fa-chevron-left"></i> 修改xib无效，运行后修改没有显示的问题
+              <a href="/2016/08/21/leetcode-house-robber/" rel="next" title="LeetCode House Robber I.II.III">
+                <i class="fa fa-chevron-left"></i> LeetCode House Robber I.II.III
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/17/package-problem/" rel="prev" title="背包问题总结">
-                背包问题总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -372,8 +419,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/16/hello-world-scala/"
-           data-title="Mac上的使用IDEA构建Play工程" data-url="http://yoursite.com/2015/11/16/hello-world-scala/">
+      <div class="ds-thread" data-thread-key="2016/08/22/note-java-string/"
+           data-title="［笔记］面试中常见的java String相关问题" data-url="http://yoursite.com/2016/08/22/note-java-string/">
       </div>
     
   </div>
@@ -464,7 +511,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装JDK"><span class="nav-number">1.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装IDEA"><span class="nav-number">2.</span> <span class="nav-text">安装IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件"><span class="nav-number">3.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello_world"><span class="nav-number">4.</span> <span class="nav-text">Hello world</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么String类是不可变的(Immutable)"><span class="nav-number">1.</span> <span class="nav-text">为什么String类是不可变的(Immutable)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串常量池(String_pool)"><span class="nav-number">2.</span> <span class="nav-text">字符串常量池(String pool)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接赋值"><span class="nav-number">2.1.</span> <span class="nav-text">直接赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关键字new来创建"><span class="nav-number">2.2.</span> <span class="nav-text">使用关键字new来创建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能会造成的内存泄漏"><span class="nav-number">3.</span> <span class="nav-text">可能会造成的内存泄漏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
