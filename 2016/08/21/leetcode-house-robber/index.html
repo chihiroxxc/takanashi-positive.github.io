@@ -85,33 +85,30 @@
 
 
 <meta name="description" content="House Robber I
-
 给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
 
 一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
 用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
-dp[i][0] = Math.max(dp[i-1][">
+dp[i][0] = Math.max(dp[i-1][0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode House Robber I.II.III">
 <meta property="og:url" content="http://yoursite.com/2016/08/21/leetcode-house-robber/index.html">
 <meta property="og:site_name" content="Chihiro's blog">
 <meta property="og:description" content="House Robber I
-
 给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
 
 一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
 用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
-dp[i][0] = Math.max(dp[i-1][">
-<meta property="og:updated_time" content="2016-08-21T16:02:24.000Z">
+dp[i][0] = Math.max(dp[i-1][0">
+<meta property="og:updated_time" content="2016-08-24T13:54:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode House Robber I.II.III">
 <meta name="twitter:description" content="House Robber I
-
 给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。如果两个相邻的房子在同一晚被偷就会自动报警。如何在不惊动警察的情况下偷到最多的钱？
 
 一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。
 用dp[i][1]表示第i间房子被偷了能达到的最大值，dp[i][0]表示没有偷能达到的最大值。
-dp[i][0] = Math.max(dp[i-1][">
+dp[i][0] = Math.max(dp[i-1][0">
 
 
 
@@ -330,8 +327,7 @@ dp[i][0] = Math.max(dp[i-1][">
       
 
       
-        <h1 id="House_Robber_I">House Robber I</h1><hr>
-<blockquote>
+        <h1 id="House_Robber_I">House Robber I</h1><blockquote>
 <p>给出一列非负整数，代表一条街上每家的财产，而你是一个小偷。<br>如果两个相邻的房子在同一晚被偷就会自动报警。<br>如何在不惊动警察的情况下偷到最多的钱？</p>
 </blockquote>
 <p>一个非常典型的dp问题，当前房子能不能偷依赖于前一个房子有没有被偷。</p>
@@ -341,8 +337,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 </code></pre><p>分析这个状态转移方程可以得知，当前的最优解只跟前一个的最优解有关，所以优化空间复杂度得到以下代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> preNo = <span class="number">0</span>; <span class="comment">//前一个没被偷得到的最大值</span></span><br><span class="line">	<span class="keyword">int</span> preYes = <span class="number">0</span>; <span class="comment">//前一个被偷了得到的最大值</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = preNo;</span><br><span class="line">		preNo = Math.max(temp,preYes); <span class="comment">//preNo被更新为当前房子没被偷的最大值</span></span><br><span class="line">		preYes = temp + nums[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> Math.max(preNo, preYes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="HouseRobber_II">HouseRobber II</h1><hr>
-<p>II是I的扩展题目，改变了房子的布局，由一列变成了一圈，这样与第一题不同的是，当你选择了第一个房子时，最后一个房子的选择就会受到影响</p>
+<h1 id="HouseRobber_II">HouseRobber II</h1><p>II是I的扩展题目，改变了房子的布局，由一列变成了一圈，这样与第一题不同的是，当你选择了第一个房子时，最后一个房子的选择就会受到影响</p>
 <p>所以可以考虑两种情况:考虑第一个房子和不考虑第一个房子。</p>
 <p>那么这个问题将会转化为两个子问题</p>
 <ul>
@@ -352,8 +347,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 <p>再求两个子问题其中的最大解即可</p>
 <p>将I中得到的解稍作修改就可以作为问题II的辅助函数<code>int rob_range(int[] nums,int start, int end)</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> Math.max(rob_range(nums,<span class="number">0</span>,nums.length-<span class="number">2</span>),rob_range(nums,<span class="number">1</span>,nums.length-<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="HouseRobber_III">HouseRobber III</h1><hr>
-<p>第三题又在第一题的基础上修改了房子的布局，变成了树形</p>
+<h1 id="HouseRobber_III">HouseRobber III</h1><p>第三题又在第一题的基础上修改了房子的布局，变成了树形</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="number">3</span></span><br><span class="line"> / \</span><br><span class="line"><span class="number">2</span>   <span class="number">3</span></span><br><span class="line"> \   \ </span><br><span class="line">  <span class="number">3</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>上面是举了个栗子，不能rob相连的节点，如果rob了父节点，就不能rob子节点</p>
 <h2 id="简单的递归">简单的递归</h2><p>最容易想到的思路就是递归，树是个很容易让人联想到递归的数据结构</p>
@@ -479,7 +473,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
