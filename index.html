@@ -252,6 +252,275 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/29/algorithm-rotated-sorted-array/" itemprop="url">
+                  旋转的排序数组
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-29T22:50:06+08:00" content="2016-08-29">
+              2016-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/29/algorithm-rotated-sorted-array/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/29/algorithm-rotated-sorted-array/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>当面对一个排序数组时，可能会被问到二分搜索（Binary Search）这个算法。但如果一个排序好的数组被旋转了呢？</p>
+<blockquote>
+<p>旋转指的是在某个点处划分数组为两部分，然后这两部分内容交换。<br>如数组<code>[0, 1, 2, 4, 5, 6, 7]</code> 在4前面划分，交换左右两部分，成为新的旋转排序数组<code>[4, 5, 6, 7, 0, 1, 2]</code></p>
+</blockquote>
+<p>那么面对这样的一个数组，还有办法进行二分查找吗？</p>
+<p>首先我们来看一个比查找简单的问题，如何找到一个旋转数组的最小值（<strong>该数组里没有重复元素</strong>）。</p>
+<h2 id="找到旋转数组的最小值">找到旋转数组的最小值</h2><p>如果遍历数组肯定可以找出最小值，但这样浪费了数组被<strong>部分排序</strong>的属性。</p>
+<p>如何利用这部分排序的属性呢？</p>
+<p>我们先按照二分法的思路,取到中间的值<code>nums[mid]</code>，如果这个最小值在左边的话，那么从<code>mid</code>到<code>high</code>肯定是排序好的，如果这个最小值在右边的话，那么从<code>mid</code>到<code>low</code>肯定是排序好的。我们可以根据<code>nums[mid]</code>和<code>nums[high]</code>的大小关系来判断最小值在左侧还是右侧。</p>
+<p>这样的时间复杂度是<code>O(NlogN)</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMin</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high = nums.length-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;high)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums[mid]&lt;nums[high])&#123;</span><br><span class="line">            <span class="comment">//右侧排序ok</span></span><br><span class="line">            high = mid;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            low = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums[low];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，再写二分查找时，循环的条件和<code>low</code>,<code>high</code>的更新值很重要。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/29/algorithm-rotated-sorted-array/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/28/leetcode-wiggle-sort/" itemprop="url">
+                  LeetCode No.324 Wiggle Sort II
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-28T22:22:24+08:00" content="2016-08-28">
+              2016-08-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/28/leetcode-wiggle-sort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/leetcode-wiggle-sort/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>Given an unsorted array nums, reorder it such that nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]….</p>
+<p>Example:<br>(1) Given nums = [1, 5, 1, 1, 6, 4], one possible answer is [1, 4, 1, 5, 1, 6].<br>(2) Given nums = [1, 3, 2, 2, 3, 1], one possible answer is [2, 3, 1, 3, 1, 2].</p>
+<p>Note:<br>You may assume all input has valid answer.</p>
+<p>Follow Up:<br>Can you do it in O(n) time and/or in-place with O(1) extra space?</p>
+</blockquote>
+<p>这道题目要求我们把一个无序数组排成“小-大-小-大”这样间隔交错的形式。</p>
+<h1 id="O(NlogN)时间复杂度O(N)空间复杂度的方法"><code>O(NlogN)</code>时间复杂度<code>O(N)</code>空间复杂度的方法</h1><p>先排序再交错排列是最简单的方法也是效率最低的方法。</p>
+<p>举个例子<code>[1,3,4,5,1,6]</code> 先排列成<code>[1,1,3,4,5,6]</code>。数组可以被看做分成了两部分——<strong>较小部分</strong>和<strong>较大部分</strong>。将较小部分插入<strong>下标为偶数</strong>的槽，得到</p>
+<p><code>[1, ,1, ,3, ,]</code></p>
+<p>将较大部分插入<strong>下标为奇数</strong>的槽，得到<code>[1,4,1,5,3,6]</code></p>
+<p>这样一定是可以的吗？我们只能保证较大部分<strong>大于等于</strong>较小部分，但却不能保证一定大于较小部分，因为有可能有重复的数字存在。</p>
+<p>比如<code>[1,2,5,5,6,7]</code>。第一个5属于较小部分，第二个5属于较大部分。如果交错排列不得当的话，很有可能将两个5排在一起。但是上面说的方法可以避免这种情况，为什么呢？我们下面把数组抽象成<strong>S</strong>mall, <strong>M</strong>edium, <strong>L</strong>arge，三个部分（S &lt; M &lt; L）。有可能出现相同排列的地方就是M了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Small half:  S . S . S . M     </span><br><span class="line">Large half:  . M . M . L .      </span><br><span class="line">--------------------------     </span><br><span class="line">Together:    S M S M S L M</span><br></pre></td></tr></table></figure>
+<p>这样可以清楚的看到，M被分散在了数组两边，不会相遇，那如果M的个数再多一点呢？<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/28/leetcode-wiggle-sort/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/24/leetcode-numbers-of-digit-one/" itemprop="url">
                   LeetCode No.233 Number of Digit One
                 </a>
@@ -1280,247 +1549,6 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/14/pick-numbers/" itemprop="url">
-                  从海量数据里选取k个数的相关问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-14T13:49:45+08:00" content="2016-04-14">
-              2016-04-14
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/14/pick-numbers/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/pick-numbers/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
-<h3 id="从海量数据里选取_Top_k个数">从海量数据里选取 Top k个数</h3><ul>
-<li>最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是<code>O(logn)</code></li>
-<li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
-<li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
-</ul>
-<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/14/pick-numbers/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/23/reading-http-notes/" itemprop="url">
-                  ［笔记］《图解Http》读书笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T15:13:14+08:00" content="2016-03-23">
-              2016-03-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/23/reading-http-notes/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/reading-http-notes/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。</p>
-</blockquote>
-<h1 id="1-网络基础">1.网络基础</h1><h2 id="HTTP1-0_vs_HTTP1-1">HTTP1.0 vs HTTP1.1</h2><p>  目前主流的是HTTP1.1</p>
-<h2 id="TCP/IP">TCP/IP</h2><p>  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。</p>
-<ul>
-<li>应用层  FTP  DNS HTTP</li>
-<li>传输层 TCP UDP</li>
-<li>网络层 </li>
-<li>数据链路层</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/23/reading-http-notes/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1566,7 +1594,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

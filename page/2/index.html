@@ -252,6 +252,247 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/14/pick-numbers/" itemprop="url">
+                  从海量数据里选取k个数的相关问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-14T13:49:45+08:00" content="2016-04-14">
+              2016-04-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/14/pick-numbers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/pick-numbers/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近看到了从海量数据里选择 k 个数这类问题，如何减少时间复杂度和空间复杂度。首先看这类问题的比较简单的变种。</p>
+<h3 id="从海量数据里选取_Top_k个数">从海量数据里选取 Top k个数</h3><ul>
+<li>最朴素的想法：将海量数据排序，选取 Top k，最少的时间复杂度也是<code>O(logn)</code></li>
+<li>改进版的想法：维护一个长度为k的有序数组，取海量数据的前k个初始化并排序，在遍历剩余数据时，若<code>num_i</code>大于于有序数组之最小值，则将其插入至有序数组中。这种算法的时间复杂度是<code>O(n*10)</code></li>
+<li>改进的改进版：将长度为k的有序数组用小顶堆来代替，当<code>num_i</code>大于堆顶元素时，将其替换，对堆进行一次<code>MIN_HEAPIFY</code>操作。这种算法的时间复杂度是<code>O(nlog10)</code></li>
+</ul>
+<p><em>如果题目加上两个字呢，让你从海量数据里<strong>随机</strong>选取k个数，怎么做呢？</em><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/14/pick-numbers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/23/reading-http-notes/" itemprop="url">
+                  ［笔记］《图解Http》读书笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-23T15:13:14+08:00" content="2016-03-23">
+              2016-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/23/reading-http-notes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/reading-http-notes/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>《图解Http》是本很通俗的书，萌系插画让人很容易理解，日本作家的风格非常明显。本文记录下我认为比较重要的知识点，留日后复习。</p>
+</blockquote>
+<h1 id="1-网络基础">1.网络基础</h1><h2 id="HTTP1-0_vs_HTTP1-1">HTTP1.0 vs HTTP1.1</h2><p>  目前主流的是HTTP1.1</p>
+<h2 id="TCP/IP">TCP/IP</h2><p>  通常使用的网络，包括互联网都是在TCP/IP协议族基础上运作的，把与互联网相关的协议集合起来总称为TCP/IP。TCP/IP分为四层：应用层，传输层，网络层，数据链路层。</p>
+<ul>
+<li>应用层  FTP  DNS HTTP</li>
+<li>传输层 TCP UDP</li>
+<li>网络层 </li>
+<li>数据链路层</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/23/reading-http-notes/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/17/all-sorts-algorithm/" itemprop="url">
                   ［总结篇］所有常见的排序算法
                 </a>
@@ -924,7 +1165,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
