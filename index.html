@@ -252,6 +252,143 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/" itemprop="url">
+                  ［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T22:16:44+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/leetcode-best-time-to-buy-and-sell-stock/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>LeetCode上有五道股票买卖的题目，都是动态规划问题，从Easy到Hard，下面总结一下这五道题目，写出 step by step 的思路。</p>
+<p>题目的内容都是相同的</p>
+<blockquote>
+<p>用一个数组表示股票每天的价格，如<code>[1,0,5,7,2,6]</code>,在不同条件的约束下，如何取得最大的收益。（不可以在同一天进行买入和卖出）</p>
+</blockquote>
+<h2 id="I-_只可以买卖一次">I. 只可以买卖一次</h2><p>这是最简单的问题，只需要在最低的时候买入，在最高的时候卖出就行了。但是显然要满足买入时间在卖出时间之前。所以我们可以用<code>min</code>记录在今天之前出现的最小价格，<code>max</code>记录在今天能够取得的最大值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(prices.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">        max = Math.max(max,prices[i]-min);<span class="comment">//计算今天可能获得的最大收益</span></span><br><span class="line">        min = Math.min(min,prices[i]);<span class="comment">//如果今天的价格比历史价格更低，更新历史价格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="II-_可以买卖多次">II. 可以买卖多次</h2><p>这道题目在之前题目的基础上，不限制卖买的次数，所以我们获得的最大收益是个累计值，并不是一次的值。</p>
+<p>动态规划题目的特征是<strong>重叠子问题</strong>和<strong>最优子结构</strong></p>
+<p>分析股票买卖问题，其实具有很明显的DP特征，如果能够买卖多次的话，当天的最大收益就是当天<strong>持有股票</strong>和<strong>不持有股票</strong>时两种收益的最大值。</p>
+<p>持有股票时的收益与<strong>前一天持有股票的收益</strong>和<strong>今天买入股票</strong>的收益有关</p>
+<p>不持有股票的收益与<strong>前一天不持有股票的收益</strong>和<strong>今天卖出股票</strong>的收益有关</p>
+<p>很容易写出状态转移方程，dp[i][0]表示在第i天不持有股票的收益，dp[i][1]表示在第i天持有股票的收益。</p>
+<pre><code>dp[<span class="link_label">i</span>][<span class="link_reference">0</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>]+prices[i]);
+dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>]-prices[i]);
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/29/algorithm-rotated-sorted-array/" itemprop="url">
                   旋转的排序数组
                 </a>
@@ -1445,110 +1582,6 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/16/binary-indexed-tree/" itemprop="url">
-                  树状数组(Binary Indexed Tree)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-16T20:58:28+08:00" content="2016-08-16">
-              2016-08-16
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/16/binary-indexed-tree/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/binary-indexed-tree/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="用途">用途</h4><p>树状数组（<strong>B</strong>inary <strong>I</strong>ndexed <strong>T</strong>ree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。</p>
-<p>顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/16/binary-indexed-tree/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1594,7 +1627,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

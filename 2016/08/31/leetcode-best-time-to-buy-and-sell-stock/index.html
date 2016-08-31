@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Dynamic Programming,LeetCode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="LeetCode上有五道股票买卖的题目，都是动态规划问题，从Easy到Hard，下面总结一下这五道题目，写出 step by step 的思路。
+题目的内容都是相同的
+
+用一个数组表示股票每天的价格，如[1,0,5,7,2,6],在不同条件的约束下，如何取得最大的收益。（不可以在同一天进行买入和卖出）
+
+I. 只可以买卖一次这是最简单的问题，只需要在最低的时候买入，在最高的时候卖出就行了。但是显然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题">
+<meta property="og:url" content="http://yoursite.com/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/index.html">
+<meta property="og:site_name" content="Chihiro's blog">
+<meta property="og:description" content="LeetCode上有五道股票买卖的题目，都是动态规划问题，从Easy到Hard，下面总结一下这五道题目，写出 step by step 的思路。
+题目的内容都是相同的
+
+用一个数组表示股票每天的价格，如[1,0,5,7,2,6],在不同条件的约束下，如何取得最大的收益。（不可以在同一天进行买入和卖出）
+
+I. 只可以买卖一次这是最简单的问题，只需要在最低的时候买入，在最高的时候卖出就行了。但是显然">
+<meta property="og:image" content="http://7xo9w5.com1.z0.glb.clouddn.com/Drawing1.jpg">
+<meta property="og:updated_time" content="2016-08-31T15:35:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题">
+<meta name="twitter:description" content="LeetCode上有五道股票买卖的题目，都是动态规划问题，从Easy到Hard，下面总结一下这五道题目，写出 step by step 的思路。
+题目的内容都是相同的
+
+用一个数组表示股票每天的价格，如[1,0,5,7,2,6],在不同条件的约束下，如何取得最大的收益。（不可以在同一天进行买入和卖出）
+
+I. 只可以买卖一次这是最简单的问题，只需要在最低的时候买入，在最高的时候卖出就行了。但是显然">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/"/>
+
+  <title> ［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题 | Chihiro's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chihiro's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T22:16:44+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/leetcode-best-time-to-buy-and-sell-stock/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LeetCode上有五道股票买卖的题目，都是动态规划问题，从Easy到Hard，下面总结一下这五道题目，写出 step by step 的思路。</p>
+<p>题目的内容都是相同的</p>
+<blockquote>
+<p>用一个数组表示股票每天的价格，如<code>[1,0,5,7,2,6]</code>,在不同条件的约束下，如何取得最大的收益。（不可以在同一天进行买入和卖出）</p>
+</blockquote>
+<h2 id="I-_只可以买卖一次">I. 只可以买卖一次</h2><p>这是最简单的问题，只需要在最低的时候买入，在最高的时候卖出就行了。但是显然要满足买入时间在卖出时间之前。所以我们可以用<code>min</code>记录在今天之前出现的最小价格，<code>max</code>记录在今天能够取得的最大值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(prices.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">        max = Math.max(max,prices[i]-min);<span class="comment">//计算今天可能获得的最大收益</span></span><br><span class="line">        min = Math.min(min,prices[i]);<span class="comment">//如果今天的价格比历史价格更低，更新历史价格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="II-_可以买卖多次">II. 可以买卖多次</h2><p>这道题目在之前题目的基础上，不限制卖买的次数，所以我们获得的最大收益是个累计值，并不是一次的值。</p>
+<p>动态规划题目的特征是<strong>重叠子问题</strong>和<strong>最优子结构</strong></p>
+<p>分析股票买卖问题，其实具有很明显的DP特征，如果能够买卖多次的话，当天的最大收益就是当天<strong>持有股票</strong>和<strong>不持有股票</strong>时两种收益的最大值。</p>
+<p>持有股票时的收益与<strong>前一天持有股票的收益</strong>和<strong>今天买入股票</strong>的收益有关</p>
+<p>不持有股票的收益与<strong>前一天不持有股票的收益</strong>和<strong>今天卖出股票</strong>的收益有关</p>
+<p>很容易写出状态转移方程，dp[i][0]表示在第i天不持有股票的收益，dp[i][1]表示在第i天持有股票的收益。</p>
+<pre><code>dp[<span class="link_label">i</span>][<span class="link_reference">0</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>]+prices[i]);
+dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = Math.max(dp[<span class="link_label">i-1</span>][<span class="link_reference">1</span>],dp[<span class="link_label">i-1</span>][<span class="link_reference">0</span>]-prices[i]);
+</code></pre><a id="more"></a>
+<p>完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][<span class="number">2</span>];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">1</span>] = prices[<span class="number">0</span>]*-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">0</span>],dp[i-<span class="number">1</span>][<span class="number">1</span>]+prices[i]);</span><br><span class="line">        dp[i][<span class="number">1</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>],dp[i-<span class="number">1</span>][<span class="number">0</span>]-prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(dp[n-<span class="number">1</span>][<span class="number">0</span>],dp[n-<span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于第i天的收益只与i-1天相关，可以优化空间复杂度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> have = prices[<span class="number">0</span>]*-<span class="number">1</span>; </span><br><span class="line">    <span class="keyword">int</span> sell = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> prehave = have;</span><br><span class="line">        have = Math.max(have, sell-prices[i]);</span><br><span class="line">        sell = Math.max(sell,prehave+prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(have,sell);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="III-_只能买卖两次">III. 只能买卖两次</h2><p>因为限制了买卖的次数，所以第i天的状态不再是简单的持有vs不持有，而是可以细分为第1次持有，第1次不持有，第2次持有，第2次不持有这四种状态，分别用变量<code>hold1</code>,<code>sell1</code>,<code>hold2</code>,<code>sell2</code>来表示。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">当i==<span class="number">0</span>时，表示第一天，动态规划的初始状态</span><br><span class="line">hold1 = -<span class="number">1</span> * prices[<span class="number">0</span>];</span><br><span class="line">sell1 = <span class="number">0</span>; <span class="comment">// 最小值为0</span></span><br><span class="line">hold2 = Integer.MIN_VALUE; <span class="comment">//不可达状态</span></span><br><span class="line">sell2 = <span class="number">0</span>; <span class="comment">//最小值为0</span></span><br></pre></td></tr></table></figure>
+<p>当i==0时，只能在第一天第一次买入，或者没有操作，<code>sell1</code>,<code>hold2</code>,<code>sell2</code>都是不可能发生的。但是由于<code>sell1</code>和<code>sell2</code>表示了收益，所以最小值为0。</p>
+<p>注意更新这四个变量的顺序，因为这些变量的依赖顺序是<code>sell2&gt;have2&gt;sell1&gt;have1</code>，所以按照这个顺序更新变量才不会影响其他的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sentinal = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">int</span> have1 = prices[<span class="number">0</span>]*-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> sell1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> have2 =  Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">int</span> sell2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices[i]==prices[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        sell2 = Math.max(sell2,have2+prices[i]);</span><br><span class="line">        have2 = Math.max(have2,sell1-prices[i]);</span><br><span class="line">        sell1 = Math.max(sell1,have1+prices[i]);</span><br><span class="line">        have1 = Math.max(have1,prices[i]*-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(Math.max(sell1,sell2),<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="IV-_可以买卖k次">IV. 可以买卖k次</h2><p>TO-DO</p>
+<h2 id="带冷却时间的买卖">带冷却时间的买卖</h2><blockquote>
+<p>可以进行多次交易，但是在卖出股票之后的第二天不能买入股票（冷却1天）</p>
+</blockquote>
+<p>这道题目如果用状态机描述一下思路将会非常清晰</p>
+<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/Drawing1.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sold = <span class="number">0</span><span class="comment">/*s2*/</span>, hold = Integer.MIN_VALUE<span class="comment">/*s1*/</span>, rest = <span class="number">0</span><span class="comment">/*s0*/</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;prices.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> prvSold = sold;</span><br><span class="line">        sold = hold + prices[i];</span><br><span class="line">        hold = Math.max(hold, rest-prices[i]);</span><br><span class="line">        rest = Math.max(rest, prvSold);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(sold, rest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dynamic-Programming/" rel="tag">#Dynamic Programming</a>
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/29/algorithm-rotated-sorted-array/" rel="next" title="旋转的排序数组">
+                <i class="fa fa-chevron-left"></i> 旋转的排序数组
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/31/leetcode-best-time-to-buy-and-sell-stock/"
+           data-title="［LeetCode］Best Time to Buy and Sell Stock 股票买卖问题" data-url="http://yoursite.com/2016/08/31/leetcode-best-time-to-buy-and-sell-stock/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
+               alt="Chang Xu" />
+          <p class="site-author-name" itemprop="name">Chang Xu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-_只可以买卖一次"><span class="nav-number">1.</span> <span class="nav-text">I. 只可以买卖一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-_可以买卖多次"><span class="nav-number">2.</span> <span class="nav-text">II. 可以买卖多次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-_只能买卖两次"><span class="nav-number">3.</span> <span class="nav-text">III. 只能买卖两次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-_可以买卖k次"><span class="nav-number">4.</span> <span class="nav-text">IV. 可以买卖k次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带冷却时间的买卖"><span class="nav-number">5.</span> <span class="nav-text">带冷却时间的买卖</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chang Xu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
