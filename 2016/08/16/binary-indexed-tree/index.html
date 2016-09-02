@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Chihiro's blog">
 <meta property="og:description" content="用途树状数组（Binary Indexed Tree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。
 顾名思义，树状数组即用数组来表示数，操作相较线段树更有效率。">
-<meta property="og:updated_time" content="2016-08-16T14:44:52.000Z">
+<meta property="og:updated_time" content="2016-09-02T15:06:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树状数组(Binary Indexed Tree)">
 <meta name="twitter:description" content="用途树状数组（Binary Indexed Tree）是一种很精妙小巧的数据结构，通常用来存储频率及操作累计频率表。基本上，可以用BIT解决的问题，都可以用线段树（Segment Tree）解决，反之则不一定。
@@ -315,7 +315,7 @@
 --*     --*
 *   *   *   *
 <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span>
-</code></pre><p>为了降低Query的时间，使用<code>tree[]</code>来存放每个节点所 cover 的和。 如对 <code>tree[5]</code> 来说，<code>tree[5] = nums[5] + tree[2]</code>。</p>
+</code></pre><p>为了降低Query的时间，使用<code>tree[]</code>来存放每个节点所 cover 的和。 如对 <code>tree[5]</code> 来说，<code>tree[5] = nums[5] + tree[4]</code>。</p>
 <p>每个节点所cover的和怎么来判断呢？有如下的计算方式：</p>
 <p>对于<code>tree[index]</code>来说，<code>tree[index] = nums[index - 2^r + 1] + ... + nums[index]</code>, <code>r</code>代表 index 的二进制形式中最右边的1后面0的个数。</p>
 <pre><code>-------------------------------*(<span class="number">37</span>)
@@ -459,7 +459,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
