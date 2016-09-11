@@ -252,6 +252,154 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/04/algorithm-single-number/" itemprop="url">
+                  求只出现一次的数的通用解法 (Single Number)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T14:59:51+08:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/algorithm-single-number/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/algorithm-single-number/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文整理自<br><a href="https://discuss.leetcode.com/topic/11877/detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers">LeetCode discuss</a></p>
+<blockquote>
+<p>给出一个整数数组，每个元素都出现了<code>k(k &gt; 1)</code>次, 除了一个元素，出现了<code>p(p &gt;= 1 p % k != 0)</code>次，找出这个元素。</p>
+</blockquote>
+<p>我们可以用位运算来解决这个问题，首先，我们要重新思考整数在计算机中的表达方式。</p>
+<p>本文使用<code>java</code>的位运算符号</p>
+<ul>
+<li>与运算 &amp;</li>
+<li>或运算 |</li>
+<li>取反 ~</li>
+<li>异或 ^</li>
+</ul>
+<h2 id="先考虑1-bit的情况">先考虑1-bit的情况</h2><p>首先我们假设有一个数组，里面所有的元素都是一位(1 bit)数字，只能是 0 或 1，我们想计算这个数组里有多少个1出现，如果出现的次数达到了<code>k</code>（上文中的<code>k</code>），就清零并且从头开始数。</p>
+<p>为了记录我们从开始到现在遇到了多少个 1 ,我们需要一个计数器(<code>counter</code>)。假设这个<code>counter</code>的二进制表达式为 x<sub>m</sub> , … , x<sub>1</sub> （从高位到低位）。我们可以总结出<code>counter</code>的四个性质</p>
+<ul>
+<li><code>counter</code>的初始状态是 0</li>
+<li>如果我们遇到了 0，<code>counter</code>应该保持不变</li>
+<li>如果遇到了 1，<code>counter</code>应该加 1</li>
+<li>为了能够记录 1 出现了<code>k</code>次，需要2<sup>m</sup> &gt;= k</li>
+</ul>
+<p>最关键的地方来了：</p>
+<p>当我们扫描整个数组的时候，<code>counter</code>中的每位是如何变化的？<br>我们要回想出一个合适的位运算，去满足<code>counter</code>的第二个属性：遇到0的话<code>counter</code>保持不变。有两个位运算可以支持这个属性 <strong><code>x = x|0</code></strong> 和 <strong><code>x = x^0</code></strong>。</p>
+<p>这两个运算应该使用哪个呢？我们用实际的计算来选择一下：</p>
+<p>最初<code>counter</code>的所有位都是 0，如 x<sub>m</sub> = 0 , … , x<sub>1</sub> = 0.如果我们遇到了第一个 1，我们得到x<sub>m</sub> = 0 , … , x<sub>2</sub> = 0, x<sub>1</sub> = 1。接下来又遇到了第二个 1，我们得到x<sub>m</sub> = 1 , … , x<sub>2</sub> = 1, x<sub>1</sub> = 0。 注意到了吗？x<sub>1</sub>由 1 变为了0。</p>
+<p>如果我们使用 | 运算，在x<sub>1</sub> = x<sub>1</sub> | i之后，由于i是 1，x<sub>1</sub>还是会保持1，所以很显然我们应该用 ^ 操作。那么对于x<sub>m</sub> , … , x<sub>2</sub>来说呢？什么时候要改变他们的值？答：应该在右侧的位全都为 1时，这时候加一需要把左侧的一位置 1，右侧全部置 0。</p>
+<p>所以我们得到了位运算的公式</p>
+<p><strong>x<sub>m</sub> = x<sub>m</sub> ^ ( x<sub>m-1</sub> &amp; … &amp; x<sub>1</sub> &amp; i )</strong></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/04/algorithm-single-number/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/02/algorithm-segment-tree/" itemprop="url">
                   线段树 (Segment Tree)
                 </a>
@@ -1460,137 +1608,11 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/18/algorithm-about-trees/" itemprop="url">
-                  ［总结篇］树和二叉树的常用算法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T20:33:55+08:00" content="2016-08-18">
-              2016-08-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/18/algorithm-about-trees/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/algorithm-about-trees/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="树（Tree）">树（Tree）</h1><p>树是一个被广泛运用的数据结构，用根结点和子节点来表示一个树。每个子节点的结构也遵循树的定义，所以很多树的问题都可以用递归来解决。</p>
-<p>首先给出树的定义</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	TreeNode[] children;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="深度优先搜索（DFS）">深度优先搜索（DFS）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root==<span class="keyword">null</span>)	<span class="keyword">return</span>;</span><br><span class="line">	visit(root);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; root.children.length;i++)&#123;</span><br><span class="line">		dfs(root.children[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="广度优先搜索_(BFS)_层序遍历">广度优先搜索 (BFS) 层序遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root==<span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="comment">//用辅助队列实现广度优先</span></span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList();</span><br><span class="line">    queue.offer(root);</span><br><span class="line">    <span class="keyword">while</span>(!queue.isEmpty())&#123;</span><br><span class="line">        <span class="keyword">int</span> size = queue.size(); <span class="comment">//该层总共的节点数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; size;i++)&#123;</span><br><span class="line">            TreeNode node = queue.poll();</span><br><span class="line">			visit(node); <span class="comment">// 访问节点</span></span><br><span class="line">			<span class="comment">// 将该节点的子节点按照从左到右的顺序加入队列</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; node.children.length; j++)&#123;</span><br><span class="line">				queue.offer(node.children[j];</span><br><span class="line">			&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/18/algorithm-about-trees/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1631,7 +1653,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1648,7 +1670,7 @@ dp[<span class="link_label">i</span>][<span class="link_reference">1</span>] = d
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

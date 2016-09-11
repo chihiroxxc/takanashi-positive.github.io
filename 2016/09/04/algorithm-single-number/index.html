@@ -1,0 +1,754 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Algorithm,Bit Manipulation," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文整理自LeetCode discuss
+
+给出一个整数数组，每个元素都出现了k(k &amp;gt; 1)次, 除了一个元素，出现了p(p &amp;gt;= 1 p % k != 0)次，找出这个元素。
+
+我们可以用位运算来解决这个问题，首先，我们要重新思考整数在计算机中的表达方式。
+本文使用java的位运算符号
+
+与运算 &amp;amp;
+或运算 |
+取反 ~
+异或 ^
+
+先考虑1-bit的情况首先我们假设有一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="求只出现一次的数的通用解法 (Single Number)">
+<meta property="og:url" content="http://yoursite.com/2016/09/04/algorithm-single-number/index.html">
+<meta property="og:site_name" content="Chihiro's blog">
+<meta property="og:description" content="本文整理自LeetCode discuss
+
+给出一个整数数组，每个元素都出现了k(k &amp;gt; 1)次, 除了一个元素，出现了p(p &amp;gt;= 1 p % k != 0)次，找出这个元素。
+
+我们可以用位运算来解决这个问题，首先，我们要重新思考整数在计算机中的表达方式。
+本文使用java的位运算符号
+
+与运算 &amp;amp;
+或运算 |
+取反 ~
+异或 ^
+
+先考虑1-bit的情况首先我们假设有一">
+<meta property="og:updated_time" content="2016-09-11T11:30:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="求只出现一次的数的通用解法 (Single Number)">
+<meta name="twitter:description" content="本文整理自LeetCode discuss
+
+给出一个整数数组，每个元素都出现了k(k &amp;gt; 1)次, 除了一个元素，出现了p(p &amp;gt;= 1 p % k != 0)次，找出这个元素。
+
+我们可以用位运算来解决这个问题，首先，我们要重新思考整数在计算机中的表达方式。
+本文使用java的位运算符号
+
+与运算 &amp;amp;
+或运算 |
+取反 ~
+异或 ^
+
+先考虑1-bit的情况首先我们假设有一">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/04/algorithm-single-number/"/>
+
+  <title> 求只出现一次的数的通用解法 (Single Number) | Chihiro's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Chihiro's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                求只出现一次的数的通用解法 (Single Number)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T14:59:51+08:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/algorithm-single-number/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/algorithm-single-number/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文整理自<br><a href="https://discuss.leetcode.com/topic/11877/detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers" target="_blank" rel="external">LeetCode discuss</a></p>
+<blockquote>
+<p>给出一个整数数组，每个元素都出现了<code>k(k &gt; 1)</code>次, 除了一个元素，出现了<code>p(p &gt;= 1 p % k != 0)</code>次，找出这个元素。</p>
+</blockquote>
+<p>我们可以用位运算来解决这个问题，首先，我们要重新思考整数在计算机中的表达方式。</p>
+<p>本文使用<code>java</code>的位运算符号</p>
+<ul>
+<li>与运算 &amp;</li>
+<li>或运算 |</li>
+<li>取反 ~</li>
+<li>异或 ^</li>
+</ul>
+<h2 id="先考虑1-bit的情况">先考虑1-bit的情况</h2><p>首先我们假设有一个数组，里面所有的元素都是一位(1 bit)数字，只能是 0 或 1，我们想计算这个数组里有多少个1出现，如果出现的次数达到了<code>k</code>（上文中的<code>k</code>），就清零并且从头开始数。</p>
+<p>为了记录我们从开始到现在遇到了多少个 1 ,我们需要一个计数器(<code>counter</code>)。假设这个<code>counter</code>的二进制表达式为 x<sub>m</sub> , … , x<sub>1</sub> （从高位到低位）。我们可以总结出<code>counter</code>的四个性质</p>
+<ul>
+<li><code>counter</code>的初始状态是 0</li>
+<li>如果我们遇到了 0，<code>counter</code>应该保持不变</li>
+<li>如果遇到了 1，<code>counter</code>应该加 1</li>
+<li>为了能够记录 1 出现了<code>k</code>次，需要2<sup>m</sup> &gt;= k</li>
+</ul>
+<p>最关键的地方来了：</p>
+<p>当我们扫描整个数组的时候，<code>counter</code>中的每位是如何变化的？<br>我们要回想出一个合适的位运算，去满足<code>counter</code>的第二个属性：遇到0的话<code>counter</code>保持不变。有两个位运算可以支持这个属性 <strong><code>x = x|0</code></strong> 和 <strong><code>x = x^0</code></strong>。</p>
+<p>这两个运算应该使用哪个呢？我们用实际的计算来选择一下：</p>
+<p>最初<code>counter</code>的所有位都是 0，如 x<sub>m</sub> = 0 , … , x<sub>1</sub> = 0.如果我们遇到了第一个 1，我们得到x<sub>m</sub> = 0 , … , x<sub>2</sub> = 0, x<sub>1</sub> = 1。接下来又遇到了第二个 1，我们得到x<sub>m</sub> = 1 , … , x<sub>2</sub> = 1, x<sub>1</sub> = 0。 注意到了吗？x<sub>1</sub>由 1 变为了0。</p>
+<p>如果我们使用 | 运算，在x<sub>1</sub> = x<sub>1</sub> | i之后，由于i是 1，x<sub>1</sub>还是会保持1，所以很显然我们应该用 ^ 操作。那么对于x<sub>m</sub> , … , x<sub>2</sub>来说呢？什么时候要改变他们的值？答：应该在右侧的位全都为 1时，这时候加一需要把左侧的一位置 1，右侧全部置 0。</p>
+<p>所以我们得到了位运算的公式</p>
+<p><strong>x<sub>m</sub> = x<sub>m</sub> ^ ( x<sub>m-1</sub> &amp; … &amp; x<sub>1</sub> &amp; i )</strong></p>
+<a id="more"></a>
+<h3 id="将counter置0">将counter置0</h3><p>使用这个公式对数组进行计算，当k = 2<sup>m-1</sup>时，假设此时<code>counter</code>的值为 k-1 时, x<sub>m</sub> = 1 , … , x<sub>2</sub> = 1, x<sub>1</sub> = 1。再遇到一个 1 时，从高位开始计算，x<sub>m</sub> = 0 , … , x<sub>2</sub> = 0, x<sub>1</sub> = 0。 <code>counter</code> 被成功置0了。</p>
+<p>然而当k &lt; 2<sup>m-1</sup> 时，我们会错过需要把<code>counter</code>置 0 的时机（因为实际上我们是当<code>counter</code>数到 2<sup>m-1</sup> 时才会将其置0）。所以我们需要在k &lt; 2<sup>m-1</sup>时提前将<code>counter</code>置 0 的机制。为了实现这个目的，我们引入<code>mask</code>变量，对x<sub>m</sub> , … , x<sub>1</sub>进行 与(AND) 操作。比如 x<sub>m</sub> = x<sub>m</sub> &amp; mask ,…, x<sub>1</sub> = x<sub>1</sub> &amp; mask。我们要确保当<code>counter</code>已经计数了<code>k</code>次时，<code>mask</code>为 0，这可以提前将<code>counter</code>清零，而其他的时候，<code>mask</code>为 1，不影响<code>counter</code>的计数。</p>
+<p>我们用<code>mask</code>的每一位和k的每一位建立起联系。假设k的二进制表达式是k<sub>m</sub> , … , k<sub>1</sub>，那么mask = ~(x<sub>1</sub><sup>‘</sup> &amp; x<sub>2</sub><sup>‘</sup> &amp; … x<sub>m</sub><sup>‘</sup>)</p>
+<p><strong>x<sub>j</sub><sup>‘</sup> = x<sub>j</sub></strong> if k<sub>j</sub> = 1<br><strong>x<sub>j</sub><sup>‘</sup> = ~x<sub>j</sub></strong> if k<sub>j</sub> = 0</p>
+<p>这样似乎有点难以理解，我们看一个例子<br>k = 5, k<sub>1</sub> = 1, k<sub>2</sub> = 0, k<sub>3</sub> =1, mask = ~( x<sub>1</sub> &amp; ~x<sub>2</sub> &amp; x<sub>3</sub> )</p>
+<p>当<code>counter</code>达到了k的值也就是5时，<code>counter</code>的二进制表达式为101, 此刻 x<sub>1</sub> &amp; ~x<sub>2</sub> &amp; x<sub>3</sub> = 1，<code>mask</code>将其取反得到 0，在<code>counter</code>没有达到k的时候， x<sub>1</sub> &amp; ~x<sub>2</sub> &amp; x<sub>3</sub>一定为 0，mask也就一定为 1。</p>
+<p>总结了以上的结论之后我们可以得出大概的计算过程</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for (int i : array) &#123;</span><br><span class="line">	xm ^= (xm-1 &amp; ... &amp; x1 &amp; i);</span><br><span class="line">	xm-1 ^= (xm-2 &amp; ... &amp; x1 &amp; i);</span><br><span class="line">	.....</span><br><span class="line">	x1 ^= i;</span><br><span class="line">	mask = ~(x1' &amp; x2' &amp; ... xm') //where xj' = xj if kj = 1 and xj' = ~xj if kj = 0 (j = 1 to m).</span><br><span class="line">	xm &amp;= mask;</span><br><span class="line">	......</span><br><span class="line">	x1 &amp;= mask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="将1-bit转化为32-bit">将1-bit转化为32-bit</h2><p>最直接的方法是使用 32 * m 个<code>counter</code>，对每一位进行计数。但是我们可以用 m 个32-bit的<code>counter</code>去代替32个<code>counter</code>。m 是能满足<code>m &gt;= logk</code>的最小整数。</p>
+<h2 id="返回只出现p次的数">返回只出现p次的数</h2><p>如果<code>counter</code>只有一个，那么所有出现k次的数都被清零，只有出现p次的数留在<code>counter</code>中。返回<code>counter</code>即可。如果<code>counter</code>不只有一个呢？</p>
+<p>如果p &lt; k, p的二进制形式中1的位对应的<code>counter</code>就是只出现p次的数。</p>
+<p>如果p &gt; k, 对p进行运算 p = p % k, 然后就可以利用 p &lt; k时的计算方法了。</p>
+<h2 id="实战演练">实战演练</h2><p>下面举几个例子</p>
+<p><code>k = 2, p = 1.</code><br><code>k = 2</code>， 2<sup>1</sup>=2 最少使用一个<code>counter</code>，由于2<sup>1</sup>刚好等于2，不需要<code>mask</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> x1 = <span class="number">0</span>;      </span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i : A) &#123;</span><br><span class="line">        x1 ^= i;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> x1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>k = 3, p = 1.</code><br><code>k = 3</code>, 2<sup>2</sup> &gt;3 最少使用两个<code>counter</code>，由于2<sup>2</sup>大于3，所以必须要用<code>mask</code>提前清零<code>counter</code>。<br>3的二进制表达式是<code>11</code>,所以 mask= ~(x<sub>1</sub> &amp; x<sub>2</sub>).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> x1 = <span class="number">0</span>;   </span><br><span class="line">     <span class="keyword">int</span> x2 = <span class="number">0</span>; </span><br><span class="line">     <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i : A) &#123;</span><br><span class="line">        x2 ^= x1 &amp; i;</span><br><span class="line">        x1 ^= i;</span><br><span class="line">        mask = ~(x1 &amp; x2);</span><br><span class="line">        x2 &amp;= mask;</span><br><span class="line">        x1 &amp;= mask;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> x1;  <span class="comment">// 由于p=1，二进制表达式是01，所以返回 x1; </span></span><br><span class="line">                 <span class="comment">// 如果p=2, 二进制表达式是10，此时我们应该返回x2;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>k = 5</code>, 2<sup>3</sup> &gt; 5，最少使用三个<code>counter</code>。由于2^3大于5，所以必须使用<code>mask</code>提前清零<code>counter</code>。5的二进制表达式是<code>101</code>,所以 mask = ~(x<sub>1</sub> &amp; ~x<sub>2</sub> &amp; x<sub>3</sub>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> x1 = <span class="number">0</span>;   </span><br><span class="line">     <span class="keyword">int</span> x2 = <span class="number">0</span>; </span><br><span class="line">     <span class="keyword">int</span> x3  = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">int</span> mask = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i : A) &#123;</span><br><span class="line">        x3 ^= x2 &amp; x1 &amp; i;</span><br><span class="line">        x2 ^= x1 &amp; i;</span><br><span class="line">        x1 ^= i;</span><br><span class="line">        mask = ~(x1 &amp; ~x2 &amp; x3);</span><br><span class="line">        x3 &amp;= mask;</span><br><span class="line">        x2 &amp;= mask;</span><br><span class="line">        x1 &amp;= mask;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> x1;  <span class="comment">// p = 3，二进制表达式为 011，所以 p1 = p2 = 1</span></span><br><span class="line">                 <span class="comment">// 返回x1 或者x2都可以</span></span><br><span class="line">                 <span class="comment">// 但如果 p = 4,二进制表达式为 100，p3 = 1，意味着我们只能返回x3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag">#Algorithm</a>
+          
+            <a href="/tags/Bit-Manipulation/" rel="tag">#Bit Manipulation</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/02/algorithm-segment-tree/" rel="next" title="线段树 (Segment Tree)">
+                <i class="fa fa-chevron-left"></i> 线段树 (Segment Tree)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/04/algorithm-single-number/"
+           data-title="求只出现一次的数的通用解法 (Single Number)" data-url="http://yoursite.com/2016/09/04/algorithm-single-number/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw1024/b1f2f511jw1esug2xgc8oj20hq0hs76e.jpg"
+               alt="Chang Xu" />
+          <p class="site-author-name" itemprop="name">Chang Xu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先考虑1-bit的情况"><span class="nav-number">1.</span> <span class="nav-text">先考虑1-bit的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将counter置0"><span class="nav-number">1.1.</span> <span class="nav-text">将counter置0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将1-bit转化为32-bit"><span class="nav-number">2.</span> <span class="nav-text">将1-bit转化为32-bit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回只出现p次的数"><span class="nav-number">3.</span> <span class="nav-text">返回只出现p次的数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战演练"><span class="nav-number">4.</span> <span class="nav-text">实战演练</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chang Xu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chihiroxc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
