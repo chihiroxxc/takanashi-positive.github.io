@@ -252,6 +252,109 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/12/ios-pod-delete-problem/" itemprop="url">
+                  Pod无法彻底删除依赖包的问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-12T21:15:11+08:00" content="2015-11-12">
+              2015-11-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/12/ios-pod-delete-problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/ios-pod-delete-problem/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在使用Pod的过程中添加第三方的依赖是很容易的事情，但是在某天我要对某个第三方的开源控件进行深度定制的修改时，我需要删除在pod中的引用，采用传统的方法add files 引用至工程，但是却报错，duplicated xxxx。估计就是Pod 删除的时候没有完全删除引用。<br>在一番寻找之后，在<strong>Target-&gt;Build Settings-&gt;Other Link Flags</strong>中找到了依然存在的第三方包引用</p>
+<p><img src="http://7xo9w5.com1.z0.glb.clouddn.com/432A969D-08AD-4111-A7BB-6A948C67FE81.jpeg" alt="如图所示"></p>
+<p>删除这里的引用之后pod update一下就ok了。不知道这是不是pod的bug，还是我使用有误</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/11/10/about-hexo/" itemprop="url">
                   Hexo搭建博客时npm的permission问题
                 </a>
@@ -381,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -389,7 +492,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
